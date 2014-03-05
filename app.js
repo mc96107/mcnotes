@@ -9,7 +9,7 @@ marked.setOptions({
 var cfile="";
 var cfolder="";
 var list=document.querySelector("#list");
-var lll=list;
+//var lll=list;
 var listf=document.querySelector("#listf");
 var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
