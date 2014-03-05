@@ -1,0 +1,119 @@
+/* ----------------------------------
+ * Lists
+ * ---------------------------------- */
+[data-type="list"] {
+  font-family: "MozTT", "Moz", Sans-serif;
+  font-weight: 400;
+  /*font: 300 18px/125% "MozTT", "Moz", Sans-serif;*/
+}
+
+[data-type="list"] ul {
+}
+[data-type="list"] li {
+list-style: none;
+  border-bottom: solid 0.1rem #dbd9d9;
+}
+[data-type="list"] li:last-child {
+  border: none;
+}
+
+li a:active {
+  background: none; 
+}
+
+[data-type="list"] li > a {
+  text-decoration: none;
+  color: #000;
+  /*display: block;*/
+  position: relative;
+  border: none;
+  outline: none;
+}
+
+[data-type="list"].active li:after,
+[data-type="list"] li > a:after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  right: -1.5rem;
+  bottom: 0;
+}
+
+[data-type="list"].active li:active:after,
+[data-type="list"].active li:hover:after,
+[data-type="list"] li > a:active:after,
+[data-type="list"] li > a:hover:after {
+  background-color: rgba(0,213,255,0.3);
+}
+
+[data-type="list"] li[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.2;
+  border-color: #888;
+}
+
+[data-type="list"] aside {
+  float: left;
+  margin: 0 0.5rem 0 0;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+[data-type="list"] li > a aside,
+[data-type="list"] li > a aside.icon {
+  background-color: transparent;
+  z-index: -1;
+}
+
+[data-type="list"] aside.pack-end {
+}
+
+[data-type="list"] aside.icon {
+
+  background: #fff no-repeat left center / 100% auto;
+  font-size: 0;
+  display: block;
+  overflow: hidden;
+}
+
+[data-type="list"] aside span[data-type=img],
+[data-type="list"] aside img {
+  display: block;
+  overflow: hidden;
+  background: transparent center center / cover;
+  position: relative;
+  z-index: 1;
+}
+
+[data-type="list"] li p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  display: block;
+  margin: 0;
+  color: #5b5b5b;
+
+}
+
+[data-type="list"] li p:first-of-type {
+  color: #000;
+
+}
+
+[data-type="list"] li p:only-child,
+[data-type="list"] li p:first-of-type:last-of-type {
+}
+
+[data-type="list"] li p em {
+
+}
+
+
+[data-type="list"] li > ul {display:none;list-style: none;}
+[data-type="list"] li:hover > ul {display:inherit;list-style: none;}
+
+

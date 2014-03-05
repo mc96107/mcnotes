@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="user-scalable=no,width=device-width" />
+    <title>mindnotes</title>
+	<link rel="stylesheet" type="text/css" href="lib/brick/brick-1.0.0rc1.css"/>
+<script type="text/javascript" src="lib/brick/brick-1.0.0rc1.js"></script>
+<!--<script type="text/javascript" src="lib/async.js"></script>-->
+	<script src="lib/remotestorage.js"></script>
+	<!--<script src="lib/dropbox.min.js"></script>-->
+	<script src="marked.js"></script>
+	<script src="util.js"></script>
+	<script src="doc.js"></script>
+	<script src="bookmark.js"></script>
+	<script src="install.js"></script>
+	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="app.css"/>
+	<link rel="stylesheet" type="text/css" href="lib/lists.css"/>
+	<link rel='shortcut icon' href='icons/note32.png' type='image/png' />
+  </head>
+  <body>
+  <x-layout id="layout-1">
+  <x-appbar id="custom-style" heading="md">
+      <button id="actionconl"></button>
+    <header onclick="headingcl();"></header>
+	<button id="actioncon"></button>
+  </x-appbar>
+  <section>
+<x-deck>
+    <x-card style="overflow:scroll;">
+	<div id="list" data-type="list" class="container"></div>
+	</x-card>
+	<x-card style="overflow:scroll;">
+	<textarea id="edtr" class="editor" onchange="pinput();""></textarea>
+	</x-card>
+	<x-card style="overflow:scroll;">
+	<div id="mrkd" class="container"></div>
+	</x-card>
+	<x-card style="overflow:scroll;">
+	<div id="rswd"></div>
+	<div id="installdiv"></div>
+	icons from http://artdesigner.lv
+	</x-card>
+</x-deck>
+</section>
+<footer>
+
+</footer>
+</x-layout>
+
+<script src='app.js'></script>
+ </body>
+</html>
