@@ -49,7 +49,8 @@ privateClient.declareType('index', {
 	});},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
-	var bookmarks=file.data;
+	if(file.data) var bookmarks=file.data;
+	else bookmarks='';
 	bookmarks=bookmarks+'  \n* '+url;
 	remoteStorage.mcnotes.writeFile('bookmarks.md',bookmarks);
 	});},
@@ -62,11 +63,10 @@ privateClient.declareType('index', {
 	var fa=f.split('/');
 	document.querySelector('x-appbar').heading=fa[fa.length-1];
 	edtr.dispatchEvent(eventrf);
-	list.innerHTML='';
-	remoteStorage.mcnotes.readdir('',list);
+	synctmp=1;
 	});
 	});},
-	removeFile: function(f){privateClient.remove(f).then(function(){list.innerHTML='';remoteStorage.mcnotes.readdir('',list);});},
+	removeFile: function(f){privateClient.remove(f).then(function(){synctmp=1;});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
@@ -89,7 +89,7 @@ remoteStorage.displayWidget("rswd");
 });
 
 remoteStorage.addEventListener('sync-done', function(){
-list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
+if (synctmp) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);synctmp=0;}
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
 });
 //http://stackoverflow.com/questions/1211764/turning-nested-json-into-an-html-nested-list-with-javascript
