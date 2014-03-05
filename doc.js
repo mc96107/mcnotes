@@ -63,7 +63,7 @@ privateClient.declareType('index', {
 	edtr.value=t;
 	flpcrd('edit');
 	var fa=f.split('/');
-	document.querySelector('x-appbar').heading=fa[fa.length-1];
+	document.querySelector('x-appbar').heading=fa[fa.length-1].split('.md')[0];
 	edtr.dispatchEvent(eventrf);
 	synctmp=1;
 	});
@@ -84,6 +84,7 @@ remoteStorage.access.claim('mcnotes', 'rw');
 remoteStorage.caching.enable('/mcnotes/');
 remoteStorage.caching.enable('/public/mcnotes/');
 remoteStorage.setApiKeys('dropbox', {api_key: 'kgpcm1nmvoo59z8'});
+remoteStorage.setApiKeys('googledrive', {client_id: '244222371468.apps.googleusercontent.com'});
 if (localStorage.getItem('ini')=='1') {localStorage.setItem('ini','2');location.reload();}//dropbox auth ini
 document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
