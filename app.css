@@ -87,8 +87,9 @@ padding-left:5%;
 }
 
 .endoftheline{
-float: right;
-display: inline-flex;
+position: absolute; right: 3%;font-size:100%;
+/*float: right;
+display: inline-flex;*/
 }
 
 .hidden{display:none;}
