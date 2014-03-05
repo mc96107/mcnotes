@@ -90,7 +90,7 @@ remoteStorage.displayWidget("rswd");
 
 remoteStorage.addEventListener('sync-done', function(){
 list.innerHTML='';
-remoteStorage.mcnotes.readdir('',list);
+if(list!=lll) {remoteStorage.mcnotes.readdir('',list);lll=list;}
 });
 //http://stackoverflow.com/questions/1211764/turning-nested-json-into-an-html-nested-list-with-javascript
 function readfll(path,item){
