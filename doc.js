@@ -44,7 +44,7 @@ privateClient.declareType('index', {
 	mrkd.innerHTML=marked(file.data);
 	flpcrd('view');
 	var fa=f.split('/');
-	document.querySelector('x-appbar').heading=fa[fa.length-1];
+	document.querySelector('x-appbar').heading=fa[fa.length-1].split('.md')[0];
 	edtr.dispatchEvent(eventrf);
 	});},
 	addbookmark: function(url){
@@ -55,7 +55,9 @@ privateClient.declareType('index', {
 	remoteStorage.mcnotes.writeFile('bookmarks.md',bookmarks);
 	});},
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
-	createFile: function(f,t){return privateClient.storeFile('text/plain', f, t).then(function(){
+	createFile: function(f,t){
+	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
+	return privateClient.storeFile('text/plain', f, t).then(function(){
 	remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
 	edtr.value=t;
@@ -66,7 +68,7 @@ privateClient.declareType('index', {
 	synctmp=1;
 	});
 	});},
-	removeFile: function(f){privateClient.remove(f).then(function(){synctmp=1;});},
+	removeFile: function(f){synctmp=1;privateClient.remove(f).then(function(){synctmp=1;});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
