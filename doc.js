@@ -87,7 +87,6 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
 //remoteStorage.mcnotes.readdir('',list);
 });
-remoteStorage.mcnotes.on('change', function(){synctmp=1;});
 remoteStorage.addEventListener('sync-done', function(){
 if (synctmp) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);synctmp=0;}
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
@@ -116,7 +115,7 @@ function readfll(path,item){
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
-
+//var intervalID = window.setInterval(refreshlist, 60*1000);
 function refreshlist(){
-return remoteStorage.caching.waitForPath('/mcnotes/').then(function(){list.innerHTML='';remoteStorage.mcnotes.readdir('',list);});
+list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
 }
