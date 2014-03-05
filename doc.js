@@ -68,7 +68,7 @@ privateClient.declareType('index', {
 	synctmp=1;
 	});
 	});},
-	removeFile: function(f){synctmp=1;privateClient.remove(f).then(function(){synctmp=1;});},
+	removeFile: function(f){var timeoutID = window.setTimeout(refreshlist, 60000);privateClient.remove(f).then(function(){synctmp=1;});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
