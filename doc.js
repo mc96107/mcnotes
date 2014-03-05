@@ -85,7 +85,7 @@ remoteStorage.setApiKeys('dropbox', {api_key: 'kgpcm1nmvoo59z8'});
 if (localStorage.getItem('ini')=='1') {localStorage.setItem('ini','2');location.reload();}//dropbox auth ini
 document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
-//remoteStorage.mcnotes.readdir('',list);
+remoteStorage.mcnotes.readdir('',list);
 });
 
 remoteStorage.addEventListener('sync-done', function(){
