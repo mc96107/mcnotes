@@ -51,7 +51,8 @@ var card={
 list:0,
 edit:1,
 view:2,
-settings:3 
+settings:3,
+about:4
 };
 document.addEventListener('DOMComponentsLoaded', function(){
 flipbx = document.querySelector('x-deck');
@@ -71,13 +72,13 @@ flipbx.showCard(card[crd]);
 else flipbx.showCard(card.map);*/
 flipbx.showCard(card[crd]);
 if(crd=='edit') {
-actionconl.innerHTML ='<i class="fa fa-bars"></i>';
+actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
 actioncon.innerHTML ='<i class="fa fa-eye"></i>';
 actioncon.onclick=function() {flpcrd('view')};
 }
 else if(crd=='view') {
-actionconl.innerHTML ='<i class="fa fa-bars"></i>';
+actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
 actioncon.innerHTML ='<i class="fa fa-pencil"></i>';
 actioncon.onclick=function() {flpcrd('edit')};
@@ -95,9 +96,16 @@ cfile="";cfolder="";
 document.querySelector('x-appbar').heading='/';
 }
 else if(crd=='settings') {
-actionconl.innerHTML ='<i class="fa fa-bars"></i>';
+actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
-actioncon.onclick='';actioncon.innerHTML='';
+actioncon.innerHTML ='<i class="fa fa-question"></i>';
+actioncon.onclick=function() {flpcrd('about')};
+}
+else if(crd=='about') {
+actionconl.innerHTML ='<i class="fa fa-wrench"></i>';
+actionconl.onclick=function() {flpcrd('settings')};
+actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
+actioncon.onclick=function() {flpcrd('list')};
 }
 else {
 actionconl.onclick='';actionconl.innerHTML='';
