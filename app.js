@@ -137,7 +137,8 @@ actionconl.onclick=function() {flpcrd('list')};
 
 function headingcl(){
 if (cfile){
- var nfl = prompt('new name',cfile);
+ var nfl = prompt('new name',cfile.split('.md')[0]);
+ if (nfl.substring(nfl.length-3,nfl.length)!='.md') nfl=nfl+'.md';
  remoteStorage.mcnotes.mf(cfile,nfl);
 cfile=nfl;
 }

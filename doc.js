@@ -73,7 +73,7 @@ privateClient.declareType('index', {
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
     	remoteStorage.mcnotes.removeFile(p1);
-    	document.querySelector('x-appbar').heading=p2;
+    	document.querySelector('x-appbar').heading=p2.split('.md')[0];
     	});},
     	rmdir: function(dir){rmRf(dir);}
     	},
