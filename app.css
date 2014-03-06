@@ -94,3 +94,19 @@ display: inline-flex;*/
 }
 
 .hidden{display:none;}
+#installdiv > button{
+position:absolute; bottom:0;
+  display: block;
+    width: 100%;
+text-align: center;
+    font-size:16px;
+	font-family:Arial;
+	font-weight:normal;
+	padding:9px 18px;
+     	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	background:-ms-linear-gradient( top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #ededed), color-stop(100%, #dfdfdf) );
+	background-color:#ededed;
+	color:#777777;  
+}
