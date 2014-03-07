@@ -133,6 +133,8 @@ actioncon.onclick=function(){
 };
 actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
 actionconl.onclick=function() {flpcrd('list')};
+
+list.innerHTML='';remoteStorage.mcnotes.readdir(f,list);
 }
 
 function headingcl(){
