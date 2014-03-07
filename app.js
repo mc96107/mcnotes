@@ -11,6 +11,7 @@ var cfolder="";
 var list=document.querySelector("#list");
 //var lll=list;
 var synctmp=1;
+var indxarr=[];
 var listf=document.querySelector("#listf");
 var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");

@@ -30,8 +30,10 @@ privateClient.declareType('index', {
 	//checkdir: function(p){return privateClient.getListing(p).then(function(objects){for(var item in objects) console.log(item);});},
 	readdir: function(path,parent){privateClient.getListing(path).then(function(objects) {
 		var ul = document.createElement("UL");
+		if (path=='') indxarr=[];
 		var ijk=0;
 		for(var item in objects) {
+		indxarr.push(path+item);
 		ul.appendChild(readfll(path,item));
 		ijk=ijk+1;
 		  }
@@ -116,10 +118,10 @@ function readfll(path,item){
 	li.appendChild(x);
 	if(item.slice(-1)=='/') li.className='isDir';
 	else li.className='isnotDir';
-	/*li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
+	li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
 	else if (this.className=='isDir current'){this.className='isDir';}
 	else {this.className=this.className;}
-	};*/
+	};
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
