@@ -123,5 +123,5 @@ li a:active {
 */
 
 [data-type="list"] li:hover > ul {display:inherit;list-style: none;}
-[data-type="list"] li.current > ul {display:inherit;list-style: none;}
+/*[data-type="list"] li.current > ul {display:inherit;list-style: none;}*/
 
