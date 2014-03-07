@@ -103,7 +103,7 @@ function readfll(path,item){
 	a.appendChild(textnode);
 	a.href = "#";
 	a.t=path+item;
-	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this.t)};
+	if(item.slice(-1)=='/') a.onclick=function() {if (this.className!='current') this.className=current; else this.className=''; setcurfolder(this.t);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
 
