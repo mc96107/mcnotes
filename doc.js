@@ -118,10 +118,10 @@ function readfll(path,item){
 	li.appendChild(x);
 	if(item.slice(-1)=='/') li.className='isDir';
 	else li.className='isnotDir';
-	li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
+	/*li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
 	else if (this.className=='isDir current'){this.className='isDir';}
 	else {this.className=this.className;}
-	};
+	};*/
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
