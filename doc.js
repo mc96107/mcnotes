@@ -116,10 +116,9 @@ function readfll(path,item){
 	li.appendChild(x);
 	if(item.slice(-1)=='/') li.className='isDir';
 	else li.className='isnotDir';
-	li.onclick=function(){if (this.className.split(' ')[this.className.split(' ').length-1]!= 'current') this.className+= " " + 'current'; 
-	else {
-	var arr=this.className.split(' ');arr.pop();this.className=arr.join(' ');
-	}
+	li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
+	else if (this.className=='isDir current'){this.className='isDir';}
+	else {this.className=this.className;}
 	};//if (this.className!='current') this.className='current'; else this.className='';
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
