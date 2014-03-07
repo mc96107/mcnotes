@@ -92,7 +92,7 @@ actioncon.onclick=function(){
  remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
 };
-cfile="";cfolder="";
+cfile="";cfolder="";refreshlist();
 document.querySelector('x-appbar').heading='/';
 }
 else if(crd=='settings') {
