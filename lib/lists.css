@@ -15,6 +15,7 @@
 [data-type="list"] li {
 list-style: none;
   border-bottom: solid 0.1rem #dbd9d9;
+  padding: 0.5em 0;
 }
 [data-type="list"] li:last-child {
   border: none;

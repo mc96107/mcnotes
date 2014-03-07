@@ -89,10 +89,10 @@ actionconl.onclick=function() {flpcrd('settings')};
 actioncon.innerHTML='<i class="fa fa-file-o"></i>';
 actioncon.onclick=function(){
  var nfld = prompt('new file','');
- remoteStorage.mcnotes.createFile(nfld,'');
+ if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
 };
-cfile="";cfolder="";refreshlist();
+cfile="";cfolder="";//refreshlist();
 document.querySelector('x-appbar').heading='/';
 }
 else if(crd=='settings') {
@@ -128,7 +128,7 @@ document.querySelector('x-appbar').heading=fa[fa.length-2];
 actioncon.innerHTML='<i class="fa fa-file-o"></i>';
 actioncon.onclick=function(){
  var nfld = prompt('new file',cfolder);
- remoteStorage.mcnotes.createFile(nfld,'');
+ if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
 };
 actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
