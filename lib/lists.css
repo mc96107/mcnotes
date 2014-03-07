@@ -114,9 +114,13 @@ li a:active {
 [data-type="list"] li p em {
 
 }
-
-
 [data-type="list"] li > ul {display:none;list-style: none;}
+/*
+[data-type="list"] li > ul {display:none;list-style: none;padding: 0;background-color:#999;}
+[data-type="list"] li > ul > li > ul {display:none;list-style: none;padding: 0;background-color:#888;}
+[data-type="list"] li > ul > li > ul > li > ul {display:none;list-style: none;padding: 0;background-color:#777;}
+[data-type="list"] li > ul > li > ul > li > ul > li > ul {display:none;list-style: none;padding: 0;background-color:#666;}
+*/
 [data-type="list"] li:hover > ul {display:inherit;list-style: none;}
 
 

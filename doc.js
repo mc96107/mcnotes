@@ -99,7 +99,7 @@ function readfll(path,item){
 	var li = document.createElement("LI");
 	var a = document.createElement('a'); 
 	if(item.slice(-1)=='/') var textnode=document.createTextNode(item.slice(0,item.length-1));
-	else var textnode=document.createTextNode(item);
+	else var textnode=document.createTextNode(item.split('.md')[0]);
 	a.appendChild(textnode);
 	a.href = "#";
 	a.t=path+item;
@@ -114,7 +114,7 @@ function readfll(path,item){
 	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
 	x.className='endoftheline';
 	li.appendChild(x);
-	
+	if(item.slice(-1)=='/') li.className='isDir';
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
