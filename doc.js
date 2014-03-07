@@ -115,6 +115,7 @@ function readfll(path,item){
 	x.className='endoftheline';
 	li.appendChild(x);
 	if(item.slice(-1)=='/') li.className='isDir';
+	else li.className='isnotDir';
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }

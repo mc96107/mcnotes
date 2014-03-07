@@ -110,6 +110,5 @@ text-align: center;
 	background-color:#ededed;
 	color:#777777;  
 }
-.isDir{
-background-color:#EEEEEE;
-}
+.isDir{background-color:#EEEEEE;}
+.isnotDir{background:none;}

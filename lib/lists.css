@@ -114,7 +114,7 @@ li a:active {
 [data-type="list"] li p em {
 
 }
-[data-type="list"] li > ul {display:none;list-style: none;}
+[data-type="list"] li > ul {display:none;list-style: none;padding: 0;}
 /*
 [data-type="list"] li > ul {display:none;list-style: none;padding: 0;background-color:#999;}
 [data-type="list"] li > ul > li > ul {display:none;list-style: none;padding: 0;background-color:#888;}
