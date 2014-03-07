@@ -103,7 +103,7 @@ function readfll(path,item){
 	a.appendChild(textnode);
 	a.href = "#";
 	a.t=path+item;
-	if(item.slice(-1)=='/') a.onclick=function() {if (this.className!='current') this.className='current'; else this.className=''; setcurfolder(this.t);};
+	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this.t);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
 
@@ -116,6 +116,7 @@ function readfll(path,item){
 	li.appendChild(x);
 	if(item.slice(-1)=='/') li.className='isDir';
 	else li.className='isnotDir';
+	li.onclick=function(){ this.className+= " " + 'current';};//if (this.className!='current') this.className='current'; else this.className='';
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
