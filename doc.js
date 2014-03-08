@@ -40,6 +40,8 @@ privateClient.declareType('index', {
 		  if(!ijk) parent.className = 'hidden';
 			else parent.appendChild(ul);
 	});},
+	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}},
+	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}},
 	readFile: function(f){privateClient.getFile(f).then(function(file) {
 	cfile=f;
 	edtr.value=file.data;
@@ -128,6 +130,9 @@ function readfll(path,item){
 	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
 	return li;
 }
+
+function colfl(path,item){if(localStorage.getItem(path+item)) localStorage.removeItem(path+item);synctmp=1; remoteStorage.mcnotes.collapse(path+item);}
+function expfl(path,item){if(localStorage.getItem(path+item)) localStorage.removeItem(path+item);synctmp=1; remoteStorage.mcnotes.expand(path+item);}
 //var intervalID = window.setInterval(refreshlist, 60*1000);
 function refreshlist(){
 list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
