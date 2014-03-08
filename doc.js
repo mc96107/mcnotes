@@ -91,11 +91,6 @@ if (localStorage.getItem('ini')=='1') {localStorage.setItem('ini','2');location.
 document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
 //remoteStorage.mcnotes.readdir('',list);
-new SwipeOut(list);
-list.addEventListener("delete", function(evt) {
-if(env.target.t.slice(-1)=='/') {if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);}
-else {if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.removeFile(this.t);}
-});
 });
 remoteStorage.addEventListener('sync-done', function(){
 if (synctmp) {refreshlist();synctmp=0;}
@@ -110,7 +105,7 @@ function readfll(path,item){
 	a.appendChild(textnode);
 	a.href = "#";
 	a.t=path+item;
-	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this.t);};
+	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
 
@@ -121,7 +116,6 @@ function readfll(path,item){
 	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
 	x.className='endoftheline';
 	li.appendChild(x);
-	li.t=path+item;
 	if(item.slice(-1)=='/') li.className='isDir';
 	else li.className='isnotDir';
 	/*li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}

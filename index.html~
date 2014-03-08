@@ -7,8 +7,9 @@
 <script type="text/javascript" src="lib/brick/brick-1.0.0rc1.js"></script>
 <!--<script type="text/javascript" src="lib/async.js"></script>-->
 	<script src="lib/remotestorage.js"></script>
-	<!--<script src="lib/hammer.min.js"></script>-->
-	<!--<script src="lib/dropbox.min.js"></script>-->
+	<script src="lib/hammer.min.js"></script>
+	<!--<script src="lib/swipeout.js"></script>
+	<script src="lib/dropbox.min.js"></script>-->
 	<script src="marked.js"></script>
 	<script src="util.js"></script>
 	<script src="doc.js"></script>

@@ -123,8 +123,8 @@ xtag.addEvents(document, {
 
 
 function setcurfolder(f){
-cfolder=f.t;
-var fa=f.t.split('/');
+cfolder=f;
+var fa=f.split('/');
 document.querySelector('x-appbar').heading=fa[fa.length-2];
 actioncon.innerHTML='<i class="fa fa-file-o"></i>';
 actioncon.onclick=function(){
@@ -134,8 +134,7 @@ actioncon.onclick=function(){
 };
 actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
 actionconl.onclick=function() {flpcrd('list')};
-if (f.className=='') f.className='current';
-else f.className='';
+
 //list.innerHTML='';remoteStorage.mcnotes.readdir(f,list);
 }
 
