@@ -154,12 +154,12 @@ cfile=nfl;
 //setclli(list.childNodes[0].childNodes,'isDir current');
 //setclli(list.childNodes[0].childNodes,'isDir');
 
-function setclli(p,class){
+function setclli(p,cl){
 var t=p.childNodes;
 for (var i = 0; i < t.length; i++) {
 if(t[i].className!='isnotDir'){
-t[i].className=class;
-setclli(t[i],class);
+t[i].className=cl;
+setclli(t[i],cl);
 }
 }
 }
