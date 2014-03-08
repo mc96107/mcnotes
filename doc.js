@@ -116,7 +116,10 @@ function readfll(path,item){
 	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
 	x.className='endoftheline';
 	li.appendChild(x);
-	if(item.slice(-1)=='/') li.className='isDir';
+	if(item.slice(-1)=='/') {
+		if(localStorage.getItem(path+item)) li.className=localStorage.getItem(path+item);)
+		else li.className='isDir';
+	}
 	else li.className='isnotDir';
 	/*li.onclick=function(){if (this.className=='isDir'){this.className='isDir current';}
 	else if (this.className=='isDir current'){this.className='isDir';}

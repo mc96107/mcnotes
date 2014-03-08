@@ -94,7 +94,7 @@ actioncon.onclick=function(){
  //remoteStorage.mcnotes.readFile(nfld);
 };
 cfile="";cfolder="";//refreshlist();
-document.querySelector('x-appbar').heading='/';
+document.querySelector('x-appbar').heading='';
 }
 else if(crd=='settings') {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
@@ -125,17 +125,18 @@ xtag.addEvents(document, {
 function setcurfolder(f){
 cfolder=f.t;
 var fa=f.t.split('/');
-document.querySelector('x-appbar').heading=fa[fa.length-2];
+//document.querySelector('x-appbar').heading=fa[fa.length-2];
 actioncon.innerHTML='<i class="fa fa-file-o"></i>';
 actioncon.onclick=function(){
  var nfld = prompt('new file',cfolder);
  if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
 };
-actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
-actionconl.onclick=function() {flpcrd('list')};
+/*actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
+actionconl.onclick=function() {flpcrd('list')};*/
 if (f.parentElement.className=='isDir') f.parentElement.className='isDir current';
 else f.parentElement.className='isDir';
+localStorage.setItem(f.t,f.parentElement.className);
 //list.innerHTML='';remoteStorage.mcnotes.readdir(f,list);
 }
 
