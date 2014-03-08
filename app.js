@@ -97,7 +97,8 @@ actioncon.onclick=function(){
  var x=document.createElement('button'); x.innerHTML='<i class="fa fa-expand"></i>';x.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
   var y=document.createElement('button'); y.innerHTML='<i class="fa fa-compress"></i>';y.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
   document.querySelector('x-appbar').heading.appendChild(x);  document.querySelector('x-appbar').heading.appendChild(y);*/
- document.querySelector('x-appbar').heading='<button onclick="setclli(list.childNodes[0],'+"'"+'isDir current'+"'"+');remoteStorage.mcnotes.expand('');"><i class="fa fa-expand"></i></button>'+'<button onclick="setclli(list.childNodes[0],'+"'"+'isDir'+"'"+');remoteStorage.mcnotes.collapse('');"><i class="fa fa-compress"></i></button>';
+  var ttt='<button onclick="setclli(list.childNodes[0],'+"'"+'isDir current'+"'"+');remoteStorage.mcnotes.expand('');"><i class="fa fa-expand"></i></button>'+'<button onclick="setclli(list.childNodes[0],'+"'"+'isDir'+"'"+');remoteStorage.mcnotes.collapse('');"><i class="fa fa-compress"></i></button>';
+ document.querySelector('x-appbar').heading=ttt;
 
 cfile="";cfolder="";//refreshlist();
 //document.querySelector('x-appbar').heading='';
