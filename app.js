@@ -151,15 +151,15 @@ cfile=nfl;
 }
 }
 
-//setclli(list.childNodes[0].childNodes,'isDir current');
-//setclli(list.childNodes[0].childNodes,'isDir');
+//setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand();
+//setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse();
 
 function setclli(p,cl){
 var t=p.childNodes;
 for (var i = 0; i < t.length; i++) {
 if(t[i].className=='isDir' || t[i].className=='isDir current'){
 t[i].className=cl;
-setclli(t[i],cl);
+setclli(t[i].childNodes[2],cl);
 }
 }
 }
