@@ -92,9 +92,14 @@ actioncon.onclick=function(){
  var nfld = prompt('new file','');
  if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
-};
+ };
+ var x=document.createElement('button'); x.innerHTML='<i class="fa fa-expand"></i>';x.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
+  var y=document.createElement('button'); y.innerHTML='<i class="fa fa-compress"></i>';y.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
+  document.querySelector('x-appbar').heading.appendChild(x);  document.querySelector('x-appbar').heading.appendChild(y);
+ 
+
 cfile="";cfolder="";//refreshlist();
-document.querySelector('x-appbar').heading='';
+//document.querySelector('x-appbar').heading='';
 }
 else if(crd=='settings') {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
@@ -151,8 +156,8 @@ cfile=nfl;
 }
 }
 
-//setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand();
-//setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse();
+//setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');
+//setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');
 
 function setclli(p,cl){
 var t=p.childNodes;
