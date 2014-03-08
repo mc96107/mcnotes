@@ -134,7 +134,7 @@ actioncon.onclick=function(){
 };
 actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
 actionconl.onclick=function() {flpcrd('list')};
-if (f.parentElement.className=='isDir') f.className='isDir current';
+if (f.parentElement.className=='isDir') f.parentElement.className='isDir current';
 else f.parentElement.className='isDir';
 //list.innerHTML='';remoteStorage.mcnotes.readdir(f,list);
 }
