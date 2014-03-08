@@ -40,8 +40,8 @@ privateClient.declareType('index', {
 		  if(!ijk) parent.className = 'hidden';
 			else parent.appendChild(ul);
 	});},
-	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}},
-	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}},
+	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}});},
+	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}});},
 	readFile: function(f){privateClient.getFile(f).then(function(file) {
 	cfile=f;
 	edtr.value=file.data;
