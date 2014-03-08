@@ -117,7 +117,7 @@ function readfll(path,item){
 	x.className='endoftheline';
 	li.appendChild(x);
 	if(item.slice(-1)=='/') {
-		if(localStorage.getItem(path+item)) li.className=localStorage.getItem(path+item);)
+		if(localStorage.getItem(path+item)) li.className=localStorage.getItem(path+item);
 		else li.className='isDir';
 	}
 	else li.className='isnotDir';
