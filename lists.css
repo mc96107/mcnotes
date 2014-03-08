@@ -5,9 +5,11 @@
   font-family: "MozTT", "Moz", Sans-serif;
   font-weight: 400;
   font-size:120%;
-  /*font: 300 18px/125% "MozTT", "Moz", Sans-serif;*/
+  /*font: 300 18px/125% "MozTT", "Moz", Sans-serif;
     margin: 1% 0px 0px -20px;
-    padding: 0px 5% 2% 0;
+    padding: 0px 5% 2% 0;*/
+        margin: 1% 0px 0px -40px;
+    padding: 0;
 }
 
 [data-type="list"] ul {
@@ -26,6 +28,7 @@ li a:active {
 }
 
 [data-type="list"] li > a {
+  margin-left:2%;
   text-decoration: none;
   color: #000;
   /*display: block;*/
