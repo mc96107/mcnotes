@@ -157,7 +157,7 @@ cfile=nfl;
 function setclli(p,cl){
 var t=p.childNodes;
 for (var i = 0; i < t.length; i++) {
-if(t[i].className!='isnotDir'){
+if(t[i].className=='isDir' || t[i].className=='isDir current'){
 t[i].className=cl;
 setclli(t[i],cl);
 }
