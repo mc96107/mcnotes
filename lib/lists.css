@@ -49,7 +49,7 @@ li a:active {
 [data-type="list"].active li:hover:after,
 [data-type="list"] li > a:active:after,
 [data-type="list"] li > a:hover:after {
-  background-color: rgba(0,213,255,0.3);
+  /*background-color: rgba(0,213,255,0.3);*/
 }
 
 [data-type="list"] li[aria-disabled="true"] {
