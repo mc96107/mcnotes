@@ -95,7 +95,7 @@ new SwipeOut(list);
 list.addEventListener("delete", function(evt) {
 if(env.target.t.slice(-1)=='/') {if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);}
 else {if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.removeFile(this.t);}
-}
+});
 });
 remoteStorage.addEventListener('sync-done', function(){
 if (synctmp) {refreshlist();synctmp=0;}
