@@ -30,10 +30,10 @@
   <section>
 <x-deck>
     <x-card style="overflow:scroll;">
-<nav class="nav center"><ul>
+<nav id="nav" class="nav center hidden"><ul>
 <li><button onclick="setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');"><i class="fa fa-expand"></i></button></li>
 <li><button onclick="setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');" ><i class="fa fa-compress"></i></button></li>
-<li><button id="xtraicons3"></button></li>
+<li><button id="newfilebtn"></button></li>
 </ul></nav>
 	<div id="list" data-type="list" class=""></div>
 	</x-card>
