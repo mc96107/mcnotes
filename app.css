@@ -95,7 +95,8 @@ margin-right:2%;
 display: inline-flex;*/
 }
 
-.hidden{display:none;}
+/*.hidden{display:none;}*/
+.hidden{height:0;opacity:0;}
 #installdiv > button{
 position:absolute; bottom:0;
   display: block;
@@ -122,6 +123,11 @@ text-align: center;
 	margin: 0;
 background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	background:-ms-linear-gradient( top, #ededed 5%, #dfdfdf 100% );
+	-webkit-transition: .125s linear;
+    	-moz-transition: .125s linear;
+    	-ms-transition: .125s linear;
+    	-o-transition: .125s linear;
+    	transition: .125s linear;
 }
 .nav ul {
 	margin: 0;

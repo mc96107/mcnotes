@@ -19,13 +19,16 @@ var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
 var newfilebtn=document.querySelector("#newfilebtn");
-
+var searchbtn=document.querySelector("#searchbtn");
 newfilebtn.innerHTML='<i class="fa fa-file-o"></i>';
 newfilebtn.onclick=function(){
  var nfld = prompt('new file','');
  if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
 };
+searchbtn.innerHTML='<i class="fa fa-search"></i>';
+searchbtn.onclick=function(){
 
+};
 var eventrf = new Event('readf');
 
 function showError(error){alert('error');}
@@ -144,8 +147,8 @@ function setcurfolder(f){
 cfolder=f.t;
 var fa=f.t.split('/');
 //document.querySelector('x-appbar').heading=fa[fa.length-2];
-actioncon.innerHTML='<i class="fa fa-file-o"></i>';
-actioncon.onclick=function(){
+//actioncon.innerHTML='<i class="fa fa-file-o"></i>';
+newfilebtn.onclick=function(){
  var nfld = prompt('new file',cfolder);
  if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
  //remoteStorage.mcnotes.readFile(nfld);
