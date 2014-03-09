@@ -99,7 +99,7 @@ actioncon.onclick=function(){
   var y=document.createElement('button'); y.innerHTML='<i class="fa fa-compress"></i>';y.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
   document.querySelector('x-appbar').heading.appendChild(x);  document.querySelector('x-appbar').heading.appendChild(y);*/
   var ttt='<button onclick="setclli(list.childNodes[0],'+"'"+'isDir current'+"'"+');remoteStorage.mcnotes.expand('+"'"+"'"+');"><i class="fa fa-expand"></i></button>'+'<button onclick="setclli(list.childNodes[0],'+"'"+'isDir'+"'"+');remoteStorage.mcnotes.collapse('+"'"+"'"+');"><i class="fa fa-compress"></i></button>';
-xtraicons.innerHTML=ttt;
+document.querySelector("#xtraicons").innerHTML=ttt;
  document.querySelector('x-appbar').heading='';
 
 cfile="";cfolder="";//refreshlist();
