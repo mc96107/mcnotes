@@ -120,7 +120,7 @@ cfile="";cfolder="";//refreshlist();
 else if(crd=='settings') {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
-actioncon.innerHTML ='<i class="fa fa-question"></i>';
+actioncon.innerHTML ='<i class="fa fa-info"></i>';
 actioncon.onclick=function() {flpcrd('about')};
 }
 else if(crd=='about') {

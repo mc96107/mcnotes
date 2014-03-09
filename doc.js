@@ -133,6 +133,8 @@ function readfll(path,item){
 
 function colfl(path,item){if(item.slice(-1)=='/') {if(localStorage.getItem(path+item)) localStorage.removeItem(path+item); remoteStorage.mcnotes.collapse(path+item);}}
 function expfl(path,item){if(item.slice(-1)=='/') {if(localStorage.getItem(path+item)) localStorage.removeItem(path+item); remoteStorage.mcnotes.expand(path+item);}}
+function srch(t){}//search function regex filter array
+
 //var intervalID = window.setInterval(refreshlist, 60*1000);
 function refreshlist(){
 list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
