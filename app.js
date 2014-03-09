@@ -17,8 +17,6 @@ var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
-var xtraicons1=document.querySelector("#xtraicons1");
-var xtraicons2=document.querySelector("#xtraicons2");
 var eventrf = new Event('readf');
 
 function showError(error){alert('error');}
@@ -98,14 +96,14 @@ actioncon.onclick=function(){
  /*
  var x=document.createElement('button'); x.innerHTML='<i class="fa fa-expand"></i>';x.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
   var y=document.createElement('button'); y.innerHTML='<i class="fa fa-compress"></i>';y.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
-  document.querySelector('x-appbar').heading.appendChild(x);  document.querySelector('x-appbar').heading.appendChild(y);*/
+  document.querySelector('x-appbar').heading.appendChild(x);  document.querySelector('x-appbar').heading.appendChild(y);
   var ttt='<button onclick="setclli(list.childNodes[0],'+"'"+'isDir current'+"'"+');remoteStorage.mcnotes.expand('+"'"+"'"+');"><i class="fa fa-expand"></i></button>';
 +'<button onclick="setclli(list.childNodes[0],'+"'"+'isDir'+"'"+');remoteStorage.mcnotes.collapse('+"'"+"'"+');"><i class="fa fa-compress"></i></button>';
 xtraicons1.innerHTML='<i class="fa fa-expand"></i>';
 xtraicons1.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
 xtraicons2.innerHTML='<i class="fa fa-compress"></i>';
 xtraicons2.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
-
+*/
  document.querySelector('x-appbar').heading='mcnotes';
 
 cfile="";cfolder="";//refreshlist();

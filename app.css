@@ -115,3 +115,26 @@ text-align: center;
 .isDir{background-color:#EEEEEE;}
 .isnotDir{background-color:#FFFFFF;}
 .current {background-color:#DDDDDD;}
+
+/* nav */
+.nav {
+	position: relative;
+	margin: 0;
+background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	background:-ms-linear-gradient( top, #ededed 5%, #dfdfdf 100% );
+}
+.nav ul {
+	margin: 0;
+	padding: 0;
+}
+.nav li {
+	margin: 0;
+	padding: 0.5rem;
+	list-style: none;
+	display: inline-block;
+}
+.nav.center ul {
+	text-align: center;
+}
+
+

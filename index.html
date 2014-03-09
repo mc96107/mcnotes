@@ -25,14 +25,16 @@
   <x-appbar id="custom-style" heading="md">
       <button id="actionconl"></button>
     <header onclick="headingcl();"></header>
-<button id="xtraicons1"></button>
-<button id="xtraicons2"></button>
 	<button id="actioncon"></button>
   </x-appbar>
   <section>
 <x-deck>
     <x-card style="overflow:scroll;">
-
+<nav class="nav center"><ul>
+<li><button onclick="setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');"><i class="fa fa-expand"></i></button></li>
+<li><button onclick="setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');" ><i class="fa fa-compress"></i></button></li>
+<li><button id="xtraicons3"></button></li>
+</ul></nav>
 	<div id="list" data-type="list" class=""></div>
 	</x-card>
 	<x-card style="overflow:scroll;">
