@@ -25,6 +25,7 @@
   <x-appbar id="custom-style" heading="md">
       <button id="actionconl"></button>
     <header onclick="headingcl();"></header>
+<span id=xtraicons"></span>
 	<button id="actioncon"></button>
   </x-appbar>
   <section>
