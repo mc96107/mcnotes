@@ -32,7 +32,7 @@ searchbtn.onclick=function(){
 var eventrf = new Event('readf');
 
 function showError(error){alert('error');}
-
+/*
 window.onload = function() {
     var t = document.getElementsByTagName('textarea')[0];
     var offset= !window.opera ? (t.offsetHeight - t.clientHeight) : (t.offsetHeight + parseInt(window.getComputedStyle(t, null).getPropertyValue('border-top-width'))) ;
@@ -54,6 +54,7 @@ window.onload = function() {
         resize(t);
     });
 }
+*/
 function pinput(){
 mrkd.innerHTML=marked(edtr.value);
 remoteStorage.mcnotes.writeFile(cfile, '\ufeff'+edtr.value);

@@ -8,13 +8,15 @@ textarea {
     border-color: Transparent; 
     overflow: auto;  
     outline: none;	
+	height:auto;
   }
   
 .editor {
     position: relative;
     width: 96%;
     min-height: 98%;
-    font: 400 24px/150% "MozTT", "Moz", Sans-serif;
+    /*font: 400 24px/150% "MozTT", "Moz", Sans-serif;*/
+	font: 300 18px/120% "MozTT", "Moz", Sans-serif;
     margin: 1% 0px 0px 1%;
     padding: 0px 5% 2% 0px;
     outline: 0px none;
