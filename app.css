@@ -14,7 +14,7 @@ textarea {
 .editor {
     position: relative;
     width: 96%;
-    min-height: 98%;
+    min-height: 96%;
     /*font: 400 24px/150% "MozTT", "Moz", Sans-serif;*/
 	font: 300 18px/120% "MozTT", "Moz", Sans-serif;
     margin: 1% 0px 0px 1%;
