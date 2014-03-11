@@ -122,7 +122,7 @@ actionconl.onclick=function(){
  if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
 };
 actioncon.innerHTML='<i class="fa fa-ellipsis-v"></i>';
-actioncon.onclick=function(){tcls(nav,'nav center hidden','nav center');};
+actioncon.onclick=function(){window.scrollTo(0,0);tcls(nav,'nav center hidden','nav center');};
  /*
  var x=document.createElement('button'); x.innerHTML='<i class="fa fa-expand"></i>';x.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
   var y=document.createElement('button'); y.innerHTML='<i class="fa fa-compress"></i>';y.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
