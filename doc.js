@@ -48,7 +48,7 @@ privateClient.declareType('index', {
 	mrkd.innerHTML=marked(file.data);
 	flpcrd('view');
 	var fa=f.split('/');
-	document.querySelector('x-appbar').heading=fa[fa.length-1].split('.md')[0];
+	document.querySelector('x-appbar').heading=f.split('.md')[0];//fa[fa.length-1]
 	edtr.dispatchEvent(eventrf);
 	});}
 	else remoteStorage.mcnotes.createFile(f,'');
@@ -70,7 +70,7 @@ privateClient.declareType('index', {
 	edtr.value=t;
 	flpcrd('edit');
 	var fa=f.split('/');
-	document.querySelector('x-appbar').heading=fa[fa.length-1].split('.md')[0];
+	document.querySelector('x-appbar').heading=f.split('.md')[0];//fa[fa.length-1]
 	edtr.dispatchEvent(eventrf);
 	synctmp=1;
 	});
