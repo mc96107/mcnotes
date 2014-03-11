@@ -444,6 +444,7 @@ var inline = {
   escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   localink: /^\[\[(.*)\]\]/,
+  datelink: \{\{\d{1,2}(\.|-)\d{1,2}(\.|-)\d{2,4}\}\},
   url: noop,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
   link: /^!?\[(inside)\]\(href\)/,
@@ -589,6 +590,21 @@ InlineLexer.prototype.output = function(src) {
       src = src.substring(cap[0].length);
       text = escape(cap[1]);
       href = text+'.md';
+      out += this.renderer.link(href, null, text);
+      continue;
+    }
+	
+	//datelink
+    if (cap = this.rules.datelink.exec(src)) {
+      src = src.substring(cap[0].length);
+      text = escape(cap[1]);
+	  if(text.split('.').length>1)
+var tt=text.split('.');
+else var tt=text.split('-');
+if(tt[0].length<2) tt[0]='0'+tt[0];
+if(tt[1].length<2) tt[1]='0'+tt[1];
+if(tt[2].length<3) tt[0]='2'+tt[2];
+      href = 'journal/'+tt.join('/');
       out += this.renderer.link(href, null, text);
       continue;
     }
