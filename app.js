@@ -12,14 +12,22 @@ var list=document.querySelector("#list");
 //var lll=list;
 var synctmp=1;
 var indxarr=[];
-var listf=document.querySelector("#listf");
+//var listf=document.querySelector("#listf");
 var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
+var expandbtn=document.querySelector("#expandbtn");
+var compressbtn=document.querySelector("#compressbtn");
 var newfilebtn=document.querySelector("#newfilebtn");
 var searchbtn=document.querySelector("#searchbtn");
+var searchdiv=document.querySelector("#searchdiv");
+nav.onclick=function(){tcls(nav,'nav center hidden','nav center');};
+expandbtn.innerHTML='<i class="fa fa-expand"></i>';
+expandbtn.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
+compressbtn.innerHTML='<i class="fa fa-compress"></i>';
+compressbtn.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
 newfilebtn.innerHTML='<i class="fa fa-file-o"></i>';
 newfilebtn.onclick=function(){
  var nfld = prompt('new file','');
@@ -27,8 +35,11 @@ newfilebtn.onclick=function(){
 };
 searchbtn.innerHTML='<i class="fa fa-search"></i>';
 searchbtn.onclick=function(){
-
+tcls(searchdiv,'','hidden');tcls(list,'','hidden');
 };
+
+
+
 var eventrf = new Event('readf');
 
 function showError(error){alert('error');}
@@ -113,22 +124,23 @@ xtraicons1.onclick=function(){setclli(list.childNodes[0],'isDir current');remote
 xtraicons2.innerHTML='<i class="fa fa-compress"></i>';
 xtraicons2.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
 */
- document.querySelector('x-appbar').heading='mcnotes';
-
+//document.querySelector('x-appbar').heading='<form action="" method="get"><input type="text" name="search" placeholder="search"/><input type="reset" value="&#xf002" alt="clear" /></form>'; //http://jsbin.com/uloli3/63/edit
 cfile="";cfolder="";//refreshlist();
-//document.querySelector('x-appbar').heading='';
+document.querySelector('x-appbar').heading='mcnotes';
 }
 else if(crd=='settings') {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
 actioncon.innerHTML ='<i class="fa fa-info"></i>';
 actioncon.onclick=function() {flpcrd('about')};
+document.querySelector('x-appbar').heading='settings';
 }
 else if(crd=='about') {
 actionconl.innerHTML ='<i class="fa fa-wrench"></i>';
 actionconl.onclick=function() {flpcrd('settings')};
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
+document.querySelector('x-appbar').heading='about';
 }
 else {
 actionconl.onclick='';actionconl.innerHTML='';

@@ -31,15 +31,16 @@
 <x-deck>
     <x-card style="overflow:scroll;">
 <nav id="nav" class="nav center hidden"><ul>
-<li><button onclick="setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');"><i class="fa fa-expand"></i></button></li>
-<li><button onclick="setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');" ><i class="fa fa-compress"></i></button></li>
+<li><button id="expandbtn"></button></li>
+<li><button id="compressbtn"></button></li>
 <li><button id="newfilebtn"></button></li>
 <li><button id="searchbtn"></button></li>
 </ul></nav>
+<div id="searchdiv" class="hidden"><form action="" method="get"><button class="btnclr fcharcoal" onclick="tcls(searchdiv,'','hidden');tcls(list,'','hidden');"> <i class="fa fa-times-circle"></i> </button><div class="inputbox"><input type="text" name="search" placeholder="search" required /><input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></div></form><div id="listsearchres" data-type="list" class=""></div></div>
 	<div id="list" data-type="list" class=""></div>
 	</x-card>
 	<x-card style="overflow:scroll;">
-	<textarea id="edtr" class="editor" onchange="pinput();""></textarea>
+	<textarea id="edtr" class="editor" onchange="pinput();"></textarea>
 	</x-card>
 	<x-card style="overflow:scroll;">
 	<div id="mrkd" class="container"></div>
@@ -57,7 +58,7 @@
 	<ul>
 	<li>Edit using <a href="http://daringfireball.net/projects/markdown/" target="_blank">markdown</a></li>
 	<li>To rename a note, open it and click on the title. </li>
-	<li>To add a folder, create a note under it: folder/note.md</li>
+	<li>To add a folder, create a note under it: folder/note</li>
 	<li>Link between notes by using "[[" eg: [[bookmarks]]</li>
 	<li>On a FirefoxOS device, when sharing a link with the app, it creates a note named bookmarks (if it noes not exist) and adds the url. </li>
 	</ul>

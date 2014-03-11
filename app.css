@@ -121,7 +121,11 @@ text-align: center;
 
 /* nav */
 .nav {
-	position: relative;
+	position: absolute;right: 0;
+    border-style:solid;
+	border-color:#000;
+	border-width:thin;
+	/*position: relative;*/
 	margin: 0;
 background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	background:-ms-linear-gradient( top, #ededed 5%, #dfdfdf 100% );
@@ -145,4 +149,25 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	text-align: center;
 }
 
+.nav > ul > li > button {font-size:100%;}
+.inputbox{ overflow: hidden;}
+input[type="text"]
+   {
+width:100%;font-size: 120%;border: none;
+   }
 
+   input[type="text"]:invalid + input[type="reset"]{
+     display: none;
+   } 
+  
+   input[type="reset"]
+   {
+	  font-family: FontAwesome;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+	right: 2%;
+	font-size: 120%;
+   }
+   .btnclr{float:left;font-size: 120%;}
