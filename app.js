@@ -212,3 +212,9 @@ function tcls(e,c1,c2){
 if (e.className==c1) e.className=c2;
 else e.className=c1;
 }
+
+function srchfn(a,b,p){
+var ul = document.createElement("UL");
+for (var i = 0; i < a.length; i++) {if(a[i].indexOf(b)) ul.appendChild(readfll(item));}
+p.appendChild(ul);
+}
