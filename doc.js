@@ -61,6 +61,7 @@ privateClient.declareType('index', {
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
 	createFile: function(f,t){
 	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
+	if (indxarr.indexOf(f)==-1){
 	return privateClient.storeFile('text/plain', f, t).then(function(){refreshlist();
 	remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
@@ -71,7 +72,10 @@ privateClient.declareType('index', {
 	edtr.dispatchEvent(eventrf);
 	synctmp=1;
 	});
-	});},
+	});
+	}
+	else remoteStorage.mcnotes.readFile(f);
+	},
 	removeFile: function(f){var timeoutID = window.setTimeout(refreshlist, 60000);privateClient.remove(f).then(function(){synctmp=1;});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
