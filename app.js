@@ -97,6 +97,7 @@ flipbx.shuffleNext();
 }
 
 function flpcrd(crd){
+nav.className='nav center hidden';
 //var flipbx = document.querySelector('x-deck');
 /*var index = flipbx.selectedIndex(flipbx.selectedCard());
 if (index!=card[crd])

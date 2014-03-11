@@ -27,10 +27,7 @@
     <header onclick="headingcl();"></header>
 	<button id="actioncon"></button>
   </x-appbar>
-  <section>
-<x-deck>
-    <x-card style="overflow:scroll;">
-<nav id="nav" class="nav center hidden"><ul>
+  <nav id="nav" class="nav center hidden"><ul>
 <li><button id="settingsbtn"></button></li>
 <li><button id="aboutbtn"></button></li>
 <li><button id="expandbtn"></button></li>
@@ -38,6 +35,10 @@
 <li><button id="newfilebtn"></button></li>
 <li><button id="searchbtn"></button></li>
 </ul></nav>
+  <section>
+<x-deck>
+    <x-card style="overflow:scroll;">
+
 <div id="searchdiv" class="hidden"><form action="" method="get"><button class="btnclr fcharcoal" onclick="tcls(searchdiv,'','hidden');tcls(list,'','hidden');"> <i class="fa fa-times-circle"></i> </button><div class="inputbox"><input type="text" name="search" oninput="srchfn(indxarr,this.value,listsearchres)" placeholder="search" required /><input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></div></form><div id="listsearchres" data-type="list" class=""></div></div>
 	<div id="list" data-type="list" class=""></div>
 	</x-card>

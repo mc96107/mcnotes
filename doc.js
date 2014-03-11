@@ -42,7 +42,7 @@ privateClient.declareType('index', {
 	});},
 	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}});},
 	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}});},
-	readFile: function(f){privateClient.getFile(f).then(function(file) {
+	readFile: function(f){if (indxarr.indexOf(f)!=-1) {privateClient.getFile(f).then(function(file) {
 	cfile=f;
 	edtr.value=file.data;
 	mrkd.innerHTML=marked(file.data);
@@ -50,7 +50,9 @@ privateClient.declareType('index', {
 	var fa=f.split('/');
 	document.querySelector('x-appbar').heading=fa[fa.length-1].split('.md')[0];
 	edtr.dispatchEvent(eventrf);
-	});},
+	});}
+	else remoteStorage.mcnotes.createFile(f,'');
+	},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
 	if(file.data) var bookmarks=file.data;

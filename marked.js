@@ -872,7 +872,10 @@ Renderer.prototype.link = function(href, title, text) {
 //   /|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i/
 //    (http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?
 var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
-  if(!href.match(urlPattern)) {  var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")'; }
+  if(!href.match(urlPattern)) { 
+  	if (indxarr.indexOf(href)!=-1) var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")'; 
+  	else var out = '<a class="italicsf" href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
+  	}
   else   var out = '<a href="' + href + '" target="_blank"';
 
   if (title) {
