@@ -598,12 +598,12 @@ InlineLexer.prototype.output = function(src) {
     if (cap = this.rules.datelink.exec(src)) {
       src = src.substring(cap[0].length);
       text = escape(cap[1]);
-	  if(text.split('.').length>1)
-var tt=text.split('.');
-else var tt=text.split('-');
+	  var tt;
+	  if(text.split('.').length>1) tt=text.split('.');
+else tt=text.split('-');
 if(tt[0].length<2) tt[0]='0'+tt[0];
 if(tt[1].length<2) tt[1]='0'+tt[1];
-if(tt[2].length<3) tt[0]='2'+tt[2];
+if(tt[2].length<3) tt[2]='20'+tt[2];
       href = 'journal/'+tt.join('/');
       out += this.renderer.link(href, null, text);
       continue;
