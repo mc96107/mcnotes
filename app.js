@@ -18,6 +18,8 @@ var mrkd=document.querySelector("#mrkd");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
+var settingsbtn=document.querySelector("#settingsbtn");
+var aboutbtn=document.querySelector("#aboutbtn");
 var expandbtn=document.querySelector("#expandbtn");
 var compressbtn=document.querySelector("#compressbtn");
 var newfilebtn=document.querySelector("#newfilebtn");
@@ -28,6 +30,10 @@ expandbtn.innerHTML='<i class="fa fa-expand"></i>';
 expandbtn.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
 compressbtn.innerHTML='<i class="fa fa-compress"></i>';
 compressbtn.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
+settingsbtn.innerHTML='<i class="fa-wrench"></i>';
+settingsbtn.onclick=function() {flpcrd('settings')};
+aboutbtn.innerHTML='<i class="fa fa-info"></i>';
+aboutbtn.onclick=function() {flpcrd('about')};
 newfilebtn.innerHTML='<i class="fa fa-file-o"></i>';
 newfilebtn.onclick=function(){
  var nfld = prompt('new file','');
@@ -109,8 +115,11 @@ actioncon.innerHTML ='<i class="fa fa-pencil"></i>';
 actioncon.onclick=function() {flpcrd('edit')};
 }
 else if(crd=='list') {
-actionconl.innerHTML ='<i class="fa fa-wrench"></i>';
-actionconl.onclick=function() {flpcrd('settings')};
+actionconl.innerHTML ='<i class="fa fa-file-o"></i>';
+actionconl.onclick=function(){
+ var nfld = prompt('new file','');
+ if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
+};
 actioncon.innerHTML='<i class="fa fa-ellipsis-v"></i>';
 actioncon.onclick=function(){tcls(nav,'nav center hidden','nav center');};
  /*

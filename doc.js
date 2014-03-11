@@ -61,7 +61,7 @@ privateClient.declareType('index', {
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
 	createFile: function(f,t){
 	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
-	return privateClient.storeFile('text/plain', f, t).then(function(){
+	return privateClient.storeFile('text/plain', f, t).then(function(){refreshlist();
 	remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
 	edtr.value=t;
