@@ -134,6 +134,7 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
     	-ms-transition: .125s linear;
     	-o-transition: .125s linear;
     	transition: .125s linear;*/
+	z-index: 10;
 }
 .nav ul {
 	margin: 0;
