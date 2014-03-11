@@ -30,7 +30,7 @@ expandbtn.innerHTML='<i class="fa fa-expand"></i>';
 expandbtn.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};
 compressbtn.innerHTML='<i class="fa fa-compress"></i>';
 compressbtn.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
-settingsbtn.innerHTML='<i class="fa-wrench"></i>';
+settingsbtn.innerHTML='<i class="fa fa-wrench"></i>';
 settingsbtn.onclick=function() {flpcrd('settings')};
 aboutbtn.innerHTML='<i class="fa fa-info"></i>';
 aboutbtn.onclick=function() {flpcrd('about')};
