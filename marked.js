@@ -558,6 +558,7 @@ InlineLexer.prototype.output = function(src) {
   var out = ''
     , link
     , text
+	, tt
     , href
     , cap;
 
@@ -598,7 +599,6 @@ InlineLexer.prototype.output = function(src) {
     if (cap = this.rules.datelink.exec(src)) {
       src = src.substring(cap[0].length);
       text = escape(cap[1]);
-	  var tt;
 	  if(text.split('.').length>1) tt=text.split('.');
 else tt=text.split('-');
 if(tt[0].length<2) tt[0]='0'+tt[0];
