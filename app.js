@@ -25,6 +25,7 @@ var compressbtn=document.querySelector("#compressbtn");
 var newfilebtn=document.querySelector("#newfilebtn");
 var searchbtn=document.querySelector("#searchbtn");
 var searchdiv=document.querySelector("#searchdiv");
+var clearsrchformbtnn=document.querySelector("#clearsrchformbtnn");
 var listsearchres=document.querySelector("#listsearchres");
 nav.onclick=function(){tcls(nav,'nav center hidden','nav center');};
 expandbtn.innerHTML='<i class="fa fa-expand"></i>';
@@ -44,7 +45,8 @@ searchbtn.innerHTML='<i class="fa fa-search"></i>';
 searchbtn.onclick=function(){
 tcls(searchdiv,'','hidden');tcls(list,'','hidden');
 };
-
+clearsrchformbtnn.innerHTML='<i class="fa fa-times-circle"></i>';
+clearsrchformbtnn.onclick=function(){tcls(searchdiv,'','hidden');tcls(list,'','hidden');};
 
 
 var eventrf = new Event('readf');
