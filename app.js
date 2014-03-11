@@ -216,6 +216,33 @@ else e.className=c1;
 function srchfn(a,b,p){
 p.innerHTML='';
 var ul = document.createElement("UL");
-for (var i = 0; i < a.length; i++) {if(a[i].indexOf(b)!=-1) ul.appendChild(readfll(a[i]));}
+for (var i = 0; i < a.length; i++) {if(a[i].indexOf(b)!=-1) ul.appendChild(readflls(a[i]));}
 p.appendChild(ul);
+}
+
+function readflls(item){
+	var li = document.createElement("LI");
+	var a = document.createElement('a'); 
+	if(item.slice(-1)=='/') var textnode=document.createTextNode(item.slice(0,item.length-1));
+	else var textnode=document.createTextNode(item.split('.md')[0]);
+	a.appendChild(textnode);
+	a.href = "#";
+	a.t=item;
+	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this);};
+	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
+	li.appendChild(a);
+
+	var x=document.createElement('button'); 
+	x.innerHTML='<i class="fa fa-times"></i>';
+	x.t=item;
+	if(item.slice(-1)!='/') x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.removeFile(this.t);};
+	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
+	x.className='endoftheline';
+	li.appendChild(x);
+	if(item.slice(-1)=='/') {
+		if(localStorage.getItem(item)) li.className=localStorage.getItem(item);
+		else li.className='isDir';
+	}
+	else li.className='isnotDir';
+	return li;
 }
