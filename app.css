@@ -121,7 +121,7 @@ text-align: center;
 
 /* nav */
 .nav {
-	position: absolute;right: 0;
+	/*position: absolute;right: 0;*/
     border-style:solid;
 	border-color:#000;
 	border-width:thin;
@@ -150,7 +150,7 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	text-align: center;
 }
 
-.nav > ul > li > button {font-size:90%;}
+.nav > ul > li > button {font-family: FontAwesome;font-size:100%;}
 #searchdiv{border-bottom: solid 0.1rem #dbd9d9;}
 .inputbox{ overflow: hidden;}
 input[type="text"]
