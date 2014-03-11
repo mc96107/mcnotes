@@ -25,6 +25,7 @@ var compressbtn=document.querySelector("#compressbtn");
 var newfilebtn=document.querySelector("#newfilebtn");
 var searchbtn=document.querySelector("#searchbtn");
 var searchdiv=document.querySelector("#searchdiv");
+var listsearchres=document.querySelector("#listsearchres");
 nav.onclick=function(){tcls(nav,'nav center hidden','nav center');};
 expandbtn.innerHTML='<i class="fa fa-expand"></i>';
 expandbtn.onclick=function(){setclli(list.childNodes[0],'isDir current');remoteStorage.mcnotes.expand('');};

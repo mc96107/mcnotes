@@ -150,7 +150,8 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	text-align: center;
 }
 
-.nav > ul > li > button {font-size:100%;}
+.nav > ul > li > button {font-size:90%;}
+#searchdiv{border-bottom: solid 0.1rem #dbd9d9;}
 .inputbox{ overflow: hidden;}
 input[type="text"]
    {

@@ -34,7 +34,7 @@ privateClient.declareType('index', {
 		var ijk=0;
 		for(var item in objects) {
 		indxarr.push(path+item);
-		ul.appendChild(readfll(path,item));
+		ul.appendChild(readfll(path+item));
 		ijk=ijk+1;
 		  }
 		  if(!ijk) parent.className = 'hidden';
@@ -99,27 +99,27 @@ if (synctmp) {refreshlist();synctmp=0;}
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
 });
 //http://stackoverflow.com/questions/1211764/turning-nested-json-into-an-html-nested-list-with-javascript
-function readfll(path,item){
+function readfll(item){
 	var li = document.createElement("LI");
 	var a = document.createElement('a'); 
 	if(item.slice(-1)=='/') var textnode=document.createTextNode(item.slice(0,item.length-1));
 	else var textnode=document.createTextNode(item.split('.md')[0]);
 	a.appendChild(textnode);
 	a.href = "#";
-	a.t=path+item;
+	a.t=item;
 	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
 
 	var x=document.createElement('button'); 
 	x.innerHTML='<i class="fa fa-times"></i>';
-	x.t=path+item;
+	x.t=item;
 	if(item.slice(-1)!='/') x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.removeFile(this.t);};
 	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
 	x.className='endoftheline';
 	li.appendChild(x);
 	if(item.slice(-1)=='/') {
-		if(localStorage.getItem(path+item)) li.className=localStorage.getItem(path+item);
+		if(localStorage.getItem(item)) li.className=localStorage.getItem(item);
 		else li.className='isDir';
 	}
 	else li.className='isnotDir';
@@ -127,7 +127,7 @@ function readfll(path,item){
 	else if (this.className=='isDir current'){this.className='isDir';}
 	else {this.className=this.className;}
 	};*/
-	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(path+item,li);
+	if(item.slice(-1)=='/') remoteStorage.mcnotes.readdir(item,li);
 	return li;
 }
 
