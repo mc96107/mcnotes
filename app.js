@@ -40,8 +40,8 @@ newfilebtn.innerHTML='<i class="fa fa-calendar"></i>';
 newfilebtn.onclick=function(){
  //var nfld = prompt('new file','');if (nfld) 
  var today = new Date();
- var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
+ var dd = today.getDate(); dd<10 ? dd="0"+dd : 0;
+var mm = today.getMonth()+1; mm<10 ? mm="0"+mm : 0; //January is 0!
 var yyyy = today.getFullYear();
  remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,'');
 };
