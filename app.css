@@ -50,8 +50,9 @@ html, body{
 }
 
 #custom-style > *{
-   padding-right:5%;
-padding-left:5%;
+	padding-right:5%;
+	padding-left:5%;
+	direction: rtl;
 }
 
 /*iconbutton*/
