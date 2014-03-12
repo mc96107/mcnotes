@@ -38,8 +38,12 @@ aboutbtn.innerHTML='<i class="fa fa-info"></i>';
 aboutbtn.onclick=function() {flpcrd('about')};
 newfilebtn.innerHTML='<i class="fa fa-calendar"></i>';
 newfilebtn.onclick=function(){
- var nfld = prompt('new file','');
- if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
+ //var nfld = prompt('new file','');if (nfld) 
+ var today = new Date();
+ var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,'');
 };
 searchbtn.innerHTML='<i class="fa fa-search"></i>';
 searchbtn.onclick=function(){
