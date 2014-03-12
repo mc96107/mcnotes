@@ -53,6 +53,7 @@ html, body{
 	padding-right:5%;
 	padding-left:5%;
 	direction: rtl;
+	white-space: nowrap;
 }
 
 /*iconbutton*/
