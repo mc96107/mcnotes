@@ -43,7 +43,7 @@ newfilebtn.onclick=function(){
  var dd = today.getDate(); dd<10 ? dd="0"+dd : 0;
 var mm = today.getMonth()+1; mm<10 ? mm="0"+mm : 0; //January is 0!
 var yyyy = today.getFullYear();
- remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,'');
+ remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,' ');
 };
 searchbtn.innerHTML='<i class="fa fa-search"></i>';
 searchbtn.onclick=function(){
@@ -125,8 +125,8 @@ actioncon.onclick=function() {flpcrd('edit')};
 else if(crd=='list') {
 actionconl.innerHTML ='<i class="fa fa-file-o"></i>';
 actionconl.onclick=function(){
- var nfld = prompt('new file','');
- if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
+ var nfld = prompt('new file',cfolder);
+ if (nfld) remoteStorage.mcnotes.createFile(nfld,' ');
 };
 actioncon.innerHTML='<i class="fa fa-ellipsis-v"></i>';
 actioncon.onclick=function(){tcls(nav,'nav center hidden','nav center');};
@@ -178,11 +178,12 @@ cfolder=f.t;
 var fa=f.t.split('/');
 //document.querySelector('x-appbar').heading=fa[fa.length-2];
 //actioncon.innerHTML='<i class="fa fa-file-o"></i>';
-newfilebtn.onclick=function(){
+/*newfilebtn.onclick=function(){
  var nfld = prompt('new file',cfolder);
- if (nfld) remoteStorage.mcnotes.createFile(nfld,'');
+ if (nfld) remoteStorage.mcnotes.createFile(nfld,' ');
  //remoteStorage.mcnotes.readFile(nfld);
 };
+*/
 /*actionconl.innerHTML ='/';// '<i class="fa fa-bars"></i>'
 actionconl.onclick=function() {flpcrd('list')};*/
 if (f.parentElement.className=='isDir') f.parentElement.className='isDir current';
