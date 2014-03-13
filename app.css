@@ -144,7 +144,7 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 }
 .nav li {
 	margin: 0;
-	padding: 0.2rem;
+	padding: 0.4rem 0.2rem;
 	list-style: none;
 	display: inline-block;
 }
@@ -152,7 +152,7 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 	text-align: center;
 }
 
-.nav > ul > li > button {font-family: FontAwesome;font-size:120%;}
+.nav > ul > li > button {font-family: FontAwesome;font-size:150%;}
 #searchdiv{border-bottom: solid 0.1rem #dbd9d9;}
 .inputbox{ overflow: hidden;}
 input[type="text"]
