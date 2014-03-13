@@ -153,11 +153,11 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 }
 
 .nav > ul > li > button {font-family: FontAwesome;font-size:150%;}
-#searchdiv{border-bottom: solid 0.1rem #dbd9d9;}
+#searchdiv{}
 .inputbox{ overflow: hidden;}
 input[type="text"]
    {
-width:100%;font-size: 120%;border: none;
+width:100%;font-size: 150%;border: none;
    }
 
    input[type="text"]:invalid + input[type="reset"]{
@@ -172,7 +172,7 @@ width:100%;font-size: 120%;border: none;
       cursor: pointer;
       position: absolute;
 	right: 2%;
-	font-size: 120%;
+	font-size: 150%;
    }
-   .btnclr{float:left;font-size: 120%;}
+   .btnclr{float:left;font-size: 150%;}
    .italicsf{font-style: italic;}
