@@ -1,0 +1,30 @@
+x-calendar {width:100%;}
+
+/* give the current day a sunken look */
+x-calendar .scheduler-current{
+    box-shadow: inset 1px 1px 4px grey;
+    background-color: rgba(65,105,225,0.5);
+}
+
+/* days with data have a border */
+x-calendar [scheduler-has-info]{
+    border-color: royalblue;
+    border-style: dashed;
+}
+
+/* days with data also have an icon */
+x-calendar [scheduler-has-info]:after{
+    content: "";
+    position: absolute;
+    background-color: royalblue;
+    right: 0%;
+    bottom: 0%;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    -webkit-transform: translate(50%, 50%);
+    -moz-transform: translate(50%, 50%);
+    -o-transform: translate(50%, 50%);
+    transform: translate(50%, 50%);
+}
+

@@ -15,10 +15,12 @@
 	<script src="util.js"></script>
 	<script src="doc.js"></script>
 	<script src="bookmark.js"></script>
+	<script src="calendar.js"></script>
 	<script src="install.js"></script>
 	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="app.css"/>
 	<link rel="stylesheet" type="text/css" href="lists.css"/>
+	<link rel="stylesheet" type="text/css" href="calendar.css"/>
 	<link rel='shortcut icon' href='icons/note32.png' type='image/png' />
   </head>
   <body>
@@ -71,6 +73,9 @@
 	<h3>Contact</h3>
 	Dimitris Gardiklis <br>twitter: <a href="https://twitter.com/gardiklis" target="_blank">@gardiklis</a>
 	</div>
+	</x-card>
+	<x-card style="overflow:scroll;">
+	<x-calendar controls notoggle></x-calendar>
 	</x-card>
 </x-deck>
 </section>

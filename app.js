@@ -8,6 +8,7 @@ marked.setOptions({
 });
 var cfile="";
 var cfolder="";
+var frmclndr=0;
 var list=document.querySelector("#list");
 //var lll=list;
 var synctmp=1;
@@ -38,12 +39,13 @@ aboutbtn.innerHTML='<i class="fa fa-info"></i>';
 aboutbtn.onclick=function() {flpcrd('about')};
 newfilebtn.innerHTML='<i class="fa fa-calendar"></i>';
 newfilebtn.onclick=function(){
- //var nfld = prompt('new file','');if (nfld) 
+flpcrd('calendar');
+ /*//var nfld = prompt('new file','');if (nfld) 
  var today = new Date();
  var dd = today.getDate(); dd<10 ? dd="0"+dd : 0;
 var mm = today.getMonth()+1; mm<10 ? mm="0"+mm : 0; //January is 0!
 var yyyy = today.getFullYear();
- remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,' ');
+ remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,' ');*/
 };
 searchbtn.innerHTML='<i class="fa fa-search"></i>';
 searchbtn.onclick=function(){
@@ -90,7 +92,8 @@ list:0,
 edit:1,
 view:2,
 settings:3,
-about:4
+about:4,
+calendar:5
 };
 document.addEventListener('DOMComponentsLoaded', function(){
 flipbx = document.querySelector('x-deck');
@@ -111,14 +114,28 @@ flipbx.showCard(card[crd]);
 else flipbx.showCard(card.map);*/
 flipbx.showCard(card[crd]);
 if(crd=='edit') {
+synctmp=1;
+if(frmclndr){
+actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
+actionconl.onclick=function() {flpcrd('calendar')};
+}
+else {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
+}
 actioncon.innerHTML ='<i class="fa fa-eye"></i>';
 actioncon.onclick=function() {flpcrd('view')};
 }
 else if(crd=='view') {
+synctmp=1;
+if(frmclndr){
+actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
+actionconl.onclick=function() {flpcrd('calendar')};
+}
+else {
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
+}
 actioncon.innerHTML ='<i class="fa fa-pencil"></i>';
 actioncon.onclick=function() {flpcrd('edit')};
 }
@@ -142,10 +159,11 @@ xtraicons2.innerHTML='<i class="fa fa-compress"></i>';
 xtraicons2.onclick=function(){setclli(list.childNodes[0],'isDir');remoteStorage.mcnotes.collapse('');};
 */
 //document.querySelector('x-appbar').heading='<form action="" method="get"><input type="text" name="search" placeholder="search"/><input type="reset" value="&#xf002" alt="clear" /></form>'; //http://jsbin.com/uloli3/63/edit
-cfile="";cfolder="";//refreshlist();
+cfile="";cfolder="";frmclndr=0;//refreshlist();
 document.querySelector('x-appbar').heading='mcnotes';
 }
 else if(crd=='settings') {
+synctmp=1;
 actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
 actionconl.onclick=function() {flpcrd('list')};
 actioncon.innerHTML ='<i class="fa fa-info"></i>';
@@ -153,11 +171,27 @@ actioncon.onclick=function() {flpcrd('about')};
 document.querySelector('x-appbar').heading='settings';
 }
 else if(crd=='about') {
+synctmp=1;
 actionconl.innerHTML ='<i class="fa fa-wrench"></i>';
 actionconl.onclick=function() {flpcrd('settings')};
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 document.querySelector('x-appbar').heading='about';
+}
+else if(crd=='calendar') {
+synctmp=1;
+frmclndr=1;
+actionconl.innerHTML ='<i class="fa fa-calendar-o"></i>';
+actionconl.onclick=function() {
+var today = new Date();
+var dd = today.getDate(); dd<10 ? dd="0"+dd : 0;
+var mm = today.getMonth()+1; mm<10 ? mm="0"+mm : 0; //January is 0!
+var yyyy = today.getFullYear();
+ remoteStorage.mcnotes.createFile(yyyy+'/'+mm+'/'+dd,' ');
+};
+actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
+actioncon.onclick=function() {flpcrd('list')};
+document.querySelector('x-appbar').heading='calendar';
 }
 else {
 actionconl.onclick='';actionconl.innerHTML='';
