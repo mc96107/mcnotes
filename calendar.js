@@ -21,7 +21,7 @@ eventsCal.customRenderFn = function(dayEl, date, isoStr){
         xtag.removeClass(dayEl, "scheduler-current");
     }
 
-    if(indxarr.indexOf(isoStr.split('-').join('/'))!=-1){
+    if(indxarr.indexOf(isoStr.split('-').join('/')+'.md')!=-1){
         dayEl.setAttribute("scheduler-has-info", true);
     }
     else{
