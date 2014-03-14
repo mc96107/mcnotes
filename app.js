@@ -114,7 +114,6 @@ flipbx.showCard(card[crd]);
 else flipbx.showCard(card.map);*/
 flipbx.showCard(card[crd]);
 if(crd=='edit') {
-synctmp=1;
 if(frmclndr){
 actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
 actionconl.onclick=function() {flpcrd('calendar')};
@@ -127,7 +126,6 @@ actioncon.innerHTML ='<i class="fa fa-eye"></i>';
 actioncon.onclick=function() {flpcrd('view')};
 }
 else if(crd=='view') {
-synctmp=1;
 if(frmclndr){
 actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
 actionconl.onclick=function() {flpcrd('calendar')};
@@ -171,7 +169,6 @@ actioncon.onclick=function() {flpcrd('about')};
 document.querySelector('x-appbar').heading='settings';
 }
 else if(crd=='about') {
-synctmp=1;
 actionconl.innerHTML ='<i class="fa fa-wrench"></i>';
 actionconl.onclick=function() {flpcrd('settings')};
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
@@ -179,7 +176,6 @@ actioncon.onclick=function() {flpcrd('list')};
 document.querySelector('x-appbar').heading='about';
 }
 else if(crd=='calendar') {
-synctmp=1;
 frmclndr=1;
 document.querySelector("x-calendar").render();
 actionconl.innerHTML ='<i class="fa fa-calendar-o"></i>';
