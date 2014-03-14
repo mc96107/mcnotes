@@ -8,13 +8,14 @@ x-calendar .scheduler-current{
 
 /* days with data have a border */
 x-calendar [scheduler-has-info]{
-    border-color: royalblue;
-    border-style: dashed;
+background-color: #EEEEEE;
+    /*border-color: royalblue;
+    border-style: dashed;*/
 }
 
 /* days with data also have an icon */
 x-calendar [scheduler-has-info]:after{
-    content: "";
+    /*content: "";
     position: absolute;
     background-color: royalblue;
     right: 0%;
@@ -25,6 +26,6 @@ x-calendar [scheduler-has-info]:after{
     -webkit-transform: translate(50%, 50%);
     -moz-transform: translate(50%, 50%);
     -o-transform: translate(50%, 50%);
-    transform: translate(50%, 50%);
+    transform: translate(50%, 50%);*/
 }
 

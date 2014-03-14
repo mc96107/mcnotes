@@ -181,6 +181,7 @@ document.querySelector('x-appbar').heading='about';
 else if(crd=='calendar') {
 synctmp=1;
 frmclndr=1;
+document.querySelector("x-calendar").render();
 actionconl.innerHTML ='<i class="fa fa-calendar-o"></i>';
 actionconl.onclick=function() {
 var today = new Date();
