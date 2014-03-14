@@ -1,5 +1,14 @@
 x-calendar {width:100%;}
 
+x-calendar .prev {
+font-size: 150%;
+top: 50%;
+}
+
+x-calendar .next {
+font-size: 150%;
+top: 50%;
+}
 /* give the current day a sunken look */
 x-calendar .scheduler-current{
     box-shadow: inset 1px 1px 4px grey;
