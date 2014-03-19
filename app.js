@@ -115,27 +115,27 @@ else flipbx.showCard(card.map);*/
 flipbx.showCard(card[crd]);
 if(crd=='edit') {
 if(frmclndr){
-actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
-actionconl.onclick=function() {flpcrd('calendar')};
+actioncon.innerHTML ='<i class="fa fa-calendar"></i>';
+actioncon.onclick=function() {flpcrd('calendar')};
 }
 else {
-actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
-actionconl.onclick=function() {flpcrd('list')};
+actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
+actioncon.onclick=function() {flpcrd('list')};
 }
-actioncon.innerHTML ='<i class="fa fa-eye"></i>';
-actioncon.onclick=function() {flpcrd('view')};
+actionconl.innerHTML ='<i class="fa fa-eye"></i>';
+actionconl.onclick=function() {flpcrd('view')};
 }
 else if(crd=='view') {
 if(frmclndr){
-actionconl.innerHTML ='<i class="fa fa-calendar"></i>';
-actionconl.onclick=function() {flpcrd('calendar')};
+actioncon.innerHTML ='<i class="fa fa-calendar"></i>';
+actioncon.onclick=function() {flpcrd('calendar')};
 }
 else {
-actionconl.innerHTML ='<i class="fa fa-list-ul"></i>';
-actionconl.onclick=function() {flpcrd('list')};
+actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
+actioncon.onclick=function() {flpcrd('list')};
 }
-actioncon.innerHTML ='<i class="fa fa-pencil"></i>';
-actioncon.onclick=function() {flpcrd('edit')};
+actionconl.innerHTML ='<i class="fa fa-pencil"></i>';
+actionconl.onclick=function() {flpcrd('edit')};
 }
 else if(crd=='list') {
 actionconl.innerHTML ='<i class="fa fa-file-o"></i>';
