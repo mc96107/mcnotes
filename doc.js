@@ -100,7 +100,7 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
 //remoteStorage.mcnotes.readdir('',list);
 });
-remoteStorage.addEventListener('features-loaded', function(){
+remoteStorage.addEventListener('sync-done', function(){
 if (synctmp) {refreshlist();synctmp=0;}
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
 });
