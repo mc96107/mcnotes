@@ -108,7 +108,7 @@ remoteStorage.addEventListener('conflict', function(){
 remoteStorage.disconnect();
 flpcrd('settings');
 });
-//remoteStorage.onChange('/mcnotes/',function(){refreshlist();});
+remoteStorage.onChange('/',function(){refreshlist();synctmp=0;});
 
 //http://stackoverflow.com/questions/1211764/turning-nested-json-into-an-html-nested-list-with-javascript
 function readfll(item){
