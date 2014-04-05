@@ -104,6 +104,12 @@ remoteStorage.addEventListener('features-loaded', function(){
 if (synctmp) {refreshlist();synctmp=0;}
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
 });
+remoteStorage.addEventListener('conflict', function(){
+remoteStorage.disconnect();
+flpcrd('settings');
+});
+remoteStorage.onChange('/mcnotes/',function(){refreshlist();});
+
 //http://stackoverflow.com/questions/1211764/turning-nested-json-into-an-html-nested-list-with-javascript
 function readfll(item){
 	var li = document.createElement("LI");
