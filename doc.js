@@ -65,7 +65,7 @@ privateClient.declareType('index', {
 	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
 	if (indxarr.indexOf(f)==-1){
 	return privateClient.storeFile('text/plain', f, t).then(function(){refreshlist();
-	remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
+	//remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
 	edtr.value=t;
 	flpcrd('edit');
@@ -74,7 +74,7 @@ privateClient.declareType('index', {
 	edtr.dispatchEvent(eventrf);
 	synctmp=1;
 	});
-	});
+	//});
 	}
 	else remoteStorage.mcnotes.readFile(f);
 	},
