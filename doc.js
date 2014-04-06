@@ -78,7 +78,7 @@ privateClient.declareType('index', {
 	}
 	else remoteStorage.mcnotes.readFile(f);
 	},
-	removeFile: function(f){if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';synctmp=1;privateClient.remove(f).then(function(){syncrefreshlista();});},
+	removeFile: function(f){privateClient.remove(f).then(function(){if(!synctmp) var timeoutID = window.setTimeout(function(){remoteStorage.mcnotes.removeFile(f);synctmp=1;syncrefreshlista();}, 5000);});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
