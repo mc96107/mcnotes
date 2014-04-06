@@ -100,13 +100,46 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
 //remoteStorage.mcnotes.readdir('',list);
 });
-remoteStorage.addEventListener('sync-done', function(){
-if (synctmp) {refreshlist();synctmp=0;}
+/*
+remoteStorage.addEventListener('connected', function(){
+document.addEventListener('DOMComponentsLoaded', function(){
+refreshlist();
+});
+});
+
+remoteStorage.addEventListener('wire-done', function(){
+console.log('wiredone');
+//if (synctmp) {refreshlist();synctmp=0;}
+//refreshlist();
 //if(list!=lll) {list.innerHTML='';remoteStorage.mcnotes.readdir('',list);lll=list;}
+if(remoteStorage.sync.done) {console.log('syncdone');
+if(searchdiv.className!='') list.className='';
+refreshlist();}
+});
+*/
+document.addEventListener('DOMComponentsLoaded', function(){
+//remoteStorage.sync.sync().then(function(){refreshlist()});
+remoteStorage.onChange('/mcnotes/',function(){
+
+if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
 });
 remoteStorage.addEventListener('conflict', function(){
 remoteStorage.disconnect();
 flpcrd('settings');
+});
+
+var timeoutID = window.setTimeout(synclista, 1000);
+
+function synclista(){
+if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
+else {window.clearTimeout(timeoutID);
+timeoutID = window.setTimeout(synclista, 1000);
+}
+}
+/*
+remoteStorage.addEventListener('wire-done', function(){
+if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;console.log('synced');}
+});*/
 });
 //remoteStorage.onChange('/',function(){refreshlist();synctmp=0;});
 
@@ -150,4 +183,5 @@ function srch(t){}//search function regex filter array
 //var intervalID = window.setInterval(refreshlist, 60*1000);
 function refreshlist(){
 list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
+//if(searchdiv.className=='hidden') list.className='';
 }
