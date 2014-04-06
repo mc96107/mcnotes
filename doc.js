@@ -78,7 +78,7 @@ privateClient.declareType('index', {
 	}
 	else remoteStorage.mcnotes.readFile(f);
 	},
-	removeFile: function(f){var timeoutID = window.setTimeout(refreshlist, 60000);privateClient.remove(f).then(function(){synctmp=1;});},
+	removeFile: function(f){synctmp=1;privateClient.remove(f).then(function(){syncrefreshlista();});},
     	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
     	//privateClient.storeFile('text/plain', p2, file.data);
     	remoteStorage.mcnotes.writeFile(p2,file.data);
@@ -127,15 +127,7 @@ remoteStorage.addEventListener('conflict', function(){
 remoteStorage.disconnect();
 flpcrd('settings');
 });
-
-var timeoutID = window.setTimeout(synclista, 1000);
-
-function synclista(){
-if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
-else {window.clearTimeout(timeoutID);
-timeoutID = window.setTimeout(synclista, 1000);
-}
-}
+syncrefreshlista();
 /*
 remoteStorage.addEventListener('wire-done', function(){
 if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;console.log('synced');}
@@ -185,3 +177,15 @@ function refreshlist(){
 list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
 //if(searchdiv.className=='hidden') list.className='';
 }
+
+function syncrefreshlista(){
+var timeoutIDD = window.setTimeout(synclista, 1000);
+
+function synclista(){
+if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
+else {window.clearTimeout(timeoutIDD);
+timeoutIDD = window.setTimeout(synclista, 1000);
+}
+}
+}
+
