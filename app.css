@@ -155,11 +155,10 @@ background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 .nav > ul > li > button {font-family: FontAwesome;font-size:150%;}
 #searchdiv{}
 .inputbox{ overflow: hidden;}
-input[type="text"]
-   {
-width:100%;font-size: 150%;border: none;
+input[type="search"]{
+   position: absolute;width:100%;font-size: 150%;border: none;
    }
-
+/*
    input[type="text"]:invalid + input[type="reset"]{
      display: none;
    } 
@@ -174,5 +173,7 @@ width:100%;font-size: 150%;border: none;
 	right: 2%;
 	font-size: 150%;
    }
+      */
    .btnclr{float:left;font-size: 150%;}
    .italicsf{font-style: italic;}
+

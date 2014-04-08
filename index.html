@@ -43,7 +43,12 @@
 <x-deck>
     <x-card style="overflow:scroll;">
 
-<div id="searchdiv" class="hidden"><form action="" method="get"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><div class="inputbox"><input type="text" name="search" oninput="srchfn(indxarr,this.value,listsearchres)" placeholder="search" required /><input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></div></form><hr><div id="listsearchres" data-type="list" class=""></div></div>
+<div id="searchdiv" class="hidden">
+
+<!--<form action="" method="get">-->
+<div class="inputbox"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><input type="search" name="search" oninput="srchfn(indxarr,this.value,listsearchres)" placeholder="search" required /></div>
+<!--<input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></form>-->
+<hr><div id="listsearchres" data-type="list" class=""></div></div>
 	<div id="list" data-type="list" class=""></div>
 	</x-card>
 	<x-card style="overflow:scroll;">
