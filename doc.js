@@ -124,7 +124,7 @@ remoteStorage.onChange('/mcnotes/',function(){
 if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
 });
 remoteStorage.addEventListener('conflict', function(){
-remoteStorage.disconnect();
+//remoteStorage.disconnect();
 flpcrd('settings');
 });
 syncrefreshlista();
