@@ -100,6 +100,15 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget("rswd");
 //remoteStorage.mcnotes.readdir('',list);
 });
+
+//check periodically for syncing not completing and resolve
+var intervalDelta = window.setInterval(checksyncing, 5*60*1000);
+function checksyncing(){
+if(!remoteStorage.sync.done) {
+var timeoutDelta = window.setTimeout(function(){if(!remoteStorage.sync.done)remoteStorage.remote.fetchDelta(); }, 60*1000);
+}
+}
+
 /*
 remoteStorage.addEventListener('connected', function(){
 document.addEventListener('DOMComponentsLoaded', function(){
