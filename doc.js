@@ -15,7 +15,8 @@ var util = remoteStorage.util;
 		else return console.log('hide '+path);//privateClient.remove(path);
       });
     } else {
-      return privateClient.remove(path);
+//      return privateClient.remove(path);
+      return remoteStorage.mcnotes.removeFile(path);
     }
   }
 
