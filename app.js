@@ -69,15 +69,6 @@ function chckdr(f,s){
 	return indxarr[findx];
 }
 
-var hammertime = Hammer(edtr).on("swipeleft", function(event) {
-remoteStorage.mcnotes.readFile(chckdr(cfile,1));
-});
-
-var hammertime = Hammer(edtr).on("swiperight", function(event) {
-//remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
-remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
-});
-
 var hammertime = Hammer(mrkd).on("swipeleft", function(event) {
 remoteStorage.mcnotes.readFile(chckdr(cfile,1));
 });
@@ -91,7 +82,7 @@ document.onkeydown = checkKey;
 function checkKey(e) {
 
     e = e || window.event;
-if(cfile){
+if(flipbx.selectedIndex==card.view){
     if (e.keyCode == '37') { // left arrow
 	remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
     }
