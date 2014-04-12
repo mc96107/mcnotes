@@ -54,6 +54,23 @@ tcls(searchdiv,'','hidden');tcls(list,'','hidden');
 clearsrchformbtnn.innerHTML='<i class="fa fa-times-circle"></i>';
 clearsrchformbtnn.onclick=function(){tcls(searchdiv,'','hidden');tcls(list,'','hidden');};
 
+//swipe to prev/next note
+var hammertime = Hammer(edtr).on("swipeleft", function(event) {
+remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
+});
+
+var hammertime = Hammer(edtr).on("swiperight", function(event) {
+remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)+1]);
+});
+
+var hammertime = Hammer(mrkd).on("swipeleft", function(event) {
+remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
+});
+
+var hammertime = Hammer(mrkd).on("swiperight", function(event) {
+remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)+1]);
+});
+
 
 var eventrf = new Event('readf');
 
