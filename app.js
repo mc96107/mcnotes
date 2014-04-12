@@ -59,12 +59,12 @@ function chckdr(f,s){
 	var findx=indxarr.indexOf(f);
 	findx+=s;
 	if (findx<0) findx=indxarr.length-1;
-	if (findx>indxarr.length) findx=0;
+	if (findx>indxarr.length-1) findx=0;
 	while(indxarr[findx].slice(-1)=='/')
 	{
 	findx+=s;
 	if (findx<0) findx=indxarr.length-1;
-	if (findx>indxarr.length) findx=0;
+	if (findx>indxarr.length-1) findx=0;
 	}
 	return indxarr[findx];
 }
