@@ -86,6 +86,22 @@ var hammertime = Hammer(mrkd).on("swiperight", function(event) {
 remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
 });
 
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+if(cfile){
+    if (e.keyCode == '37') { // left arrow
+	remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
+    }
+    else if (e.keyCode == '39') { // right arrow
+	remoteStorage.mcnotes.readFile(chckdr(cfile,1));
+    }
+ }
+}
+
+
 
 var eventrf = new Event('readf');
 
