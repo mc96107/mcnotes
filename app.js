@@ -55,20 +55,33 @@ clearsrchformbtnn.innerHTML='<i class="fa fa-times-circle"></i>';
 clearsrchformbtnn.onclick=function(){tcls(searchdiv,'','hidden');tcls(list,'','hidden');};
 
 //swipe to prev/next note
+function chckdr(f,s){
+	var findx=indxarr.indexOf(f);
+	findx+=s;
+	while(indxarr[findx].slice(-1)=='/')
+	{
+	findx+=s;
+	if (indxarr[findx]<0) findx=indxarr.length;
+	if (indxarr[findx]>indxarr.length) findx=0;
+	}
+	return indxarr[findx];
+}
+
 var hammertime = Hammer(edtr).on("swipeleft", function(event) {
-remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
+remoteStorage.mcnotes.readFile(chckdr(cfile,1));
 });
 
 var hammertime = Hammer(edtr).on("swiperight", function(event) {
-remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)+1]);
+//remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
+remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
 });
 
 var hammertime = Hammer(mrkd).on("swipeleft", function(event) {
-remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)-1]);
+remoteStorage.mcnotes.readFile(chckdr(cfile,1));
 });
 
 var hammertime = Hammer(mrkd).on("swiperight", function(event) {
-remoteStorage.mcnotes.readFile(indxarr[indxarr.indexOf(cfile)+1]);
+remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
 });
 
 
