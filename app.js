@@ -69,11 +69,11 @@ function chckdr(f,s){
 	return indxarr[findx];
 }
 
-var hammertime = Hammer(mrkd).on("swipeleft", function(event) {
+var hammertime = Hammer(mrkd.parentElement).on("swipeleft", function(event) {
 remoteStorage.mcnotes.readFile(chckdr(cfile,1));
 });
 
-var hammertime = Hammer(mrkd).on("swiperight", function(event) {
+var hammertime = Hammer(mrkd.parentElement).on("swiperight", function(event) {
 remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
 });
 
