@@ -294,7 +294,12 @@ else e.className=c1;
 function srchfn(a,b,p){
 p.innerHTML='';
 var ul = document.createElement("UL");
-for (var i = 0; i < a.length; i++) {if(a[i].indexOf(b)!=-1) ul.appendChild(readflls(a[i]));}
+for (var i = 0; i < a.length; i++) {
+if (a[i].slice(-1)!='/'){
+if(a[i].indexOf(b)!=-1) ul.appendChild(readflls(a[i]));
+else remoteStorage.mcnotes.searchdoc(a[i],b,ul);
+}
+}
 p.appendChild(ul);
 }
 

@@ -54,6 +54,12 @@ privateClient.declareType('index', {
 	});}
 	else remoteStorage.mcnotes.createFile(f,'');
 	},
+	searchdoc: function(f,b,ul){
+	privateClient.getFile(f).then(function(file) {
+		if(file.data.indexOf(b)!=-1) ul.appendChild(readflls(f));
+		else return false;
+		});
+	},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
 	if(file.data) var bookmarks=file.data;
