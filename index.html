@@ -74,6 +74,7 @@
 	<li>To add a folder, create a note under it: folder/note</li>
 	<li>Link between notes by using "[[" eg: [[bookmarks]]</li>
 	<li>Press right/left keyboard arrow or swipe right-left to move between notes</li>
+	<li>Press "b" keyboard key or pinchin to show breadcrumbs</li>
 	<li>Use search <i class="fa fa-search"></i> to find notes</li>
     <li>Use calendar <i class="fa fa-calendar"></i> to easily add/edit journal notes</li>
 	<li>On a FirefoxOS device, when sharing a link with the app, it creates a note named bookmarks (if it noes not exist) and adds the url. </li>
@@ -86,6 +87,9 @@
 	</x-card>
 	<x-card style="overflow:scroll;">
 	<x-calendar controls notoggle></x-calendar>
+	</x-card>
+	<x-card style="overflow:scroll;">
+	<div id="breadcrumbs" data-type="list" class=""></div>
 	</x-card>
 </x-deck>
 </section>

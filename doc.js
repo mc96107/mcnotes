@@ -48,6 +48,25 @@ privateClient.declareType('index', {
 	edtr.value=file.data;
 	mrkd.innerHTML=marked(file.data);
 	flpcrd('view');
+	
+	//breadcrumbs list 
+	breadcrumbs.push(f);
+	while (breadcrumbs.length>10) breadcrumbs.shift();
+	var ul = document.createElement("UL");	
+	for (var i = 0; i < breadcrumbs.length; i++){
+		var li = document.createElement("LI");
+		var a = document.createElement('a'); 
+		var textnode=document.createTextNode(breadcrumbs[i].split('.md')[0]);
+		a.appendChild(textnode);
+		a.href = "#";
+		a.t=breadcrumbs[i];
+		a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
+		li.appendChild(a);
+		ul.appendChild(li);
+	}
+	document.querySelector("#breadcrumbs").innerHTML='';
+	document.querySelector("#breadcrumbs").appendChild(ul);
+	
 	var fa=f.split('/');
 	document.querySelector('x-appbar').heading=f.split('.md')[0];//fa[fa.length-1]
 	edtr.dispatchEvent(eventrf);

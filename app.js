@@ -9,6 +9,7 @@ marked.setOptions({
 var cfile="";
 var cfolder="";
 var frmclndr=0;
+var breadcrumbs=[];
 var list=document.querySelector("#list");
 //var lll=list;
 var synctmp=1;
@@ -16,6 +17,7 @@ var indxarr=[];
 //var listf=document.querySelector("#listf");
 var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
+var breadcrumbsdiv=document.querySelector("#breadcrumbs");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
@@ -77,11 +79,20 @@ var hammertime = Hammer(mrkd.parentElement).on("swiperight", function(event) {
 remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
 });
 
+var hammertime = Hammer(mrkd.parentElement).on("pinchin", function(event) {
+flpcrd('breadcrumbs');
+});
+
+var hammertime = Hammer(breadcrumbsdiv.parentElement).on("pinchout", function(event) {
+remoteStorage.mcnotes.readFile(cfile);
+});
+
 document.onkeydown = checkKey;
 
 function checkKey(e) {
 
     e = e || window.event;
+if(flipbx){
 if(flipbx.selectedIndex==card.view){
     if (e.keyCode == '37') { // left arrow
 	remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
@@ -89,11 +100,18 @@ if(flipbx.selectedIndex==card.view){
     else if (e.keyCode == '39') { // right arrow
 	remoteStorage.mcnotes.readFile(chckdr(cfile,1));
     }
+	else if (e.keyCode == '66') { // right arrow
+	flpcrd('breadcrumbs');
+    }
  }
+
+if(flipbx.selectedIndex==card.breadcrumbs){
+	if (e.keyCode == '86') { // right arrow
+	remoteStorage.mcnotes.readFile(cfile);
+    }
 }
-
-
-
+}
+}
 var eventrf = new Event('readf');
 
 function showError(error){alert('error');}
@@ -132,7 +150,8 @@ edit:1,
 view:2,
 settings:3,
 about:4,
-calendar:5
+calendar:5,
+breadcrumbs:6
 };
 document.addEventListener('DOMComponentsLoaded', function(){
 flipbx = document.querySelector('x-deck');
@@ -228,6 +247,13 @@ var yyyy = today.getFullYear();
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 document.querySelector('x-appbar').heading='calendar';
+}
+else if(crd=='breadcrumbs') {
+actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
+actioncon.onclick=function() {flpcrd('list')};
+actionconl.innerHTML ='<i class="fa fa-arrow-left"></i>';
+actionconl.onclick=function() {remoteStorage.mcnotes.readFile(cfile);};
+document.querySelector('x-appbar').heading='breadcrumbs';
 }
 else {
 actionconl.onclick='';actionconl.innerHTML='';
