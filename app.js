@@ -253,7 +253,7 @@ actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 actionconl.innerHTML ='<i class="fa fa-arrow-left"></i>';
 actionconl.onclick=function() {remoteStorage.mcnotes.readFile(cfile);};
-document.querySelector('x-appbar').heading='breadcrumbs';
+//document.querySelector('x-appbar').heading='breadcrumbs';
 }
 else {
 actionconl.onclick='';actionconl.innerHTML='';
