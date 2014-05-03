@@ -18,13 +18,15 @@ var block = {
   heading: /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,
   nptable: noop,
   lheading: /^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,
-  blockquote: /^( *>[^\n]+(\n[^\n]+)*\n*)+/,
-  list: /^( *)(bull) [\s\S]+?(?:hr|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
+  blockquote: /^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,
+  list: /^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
+  task: noop,
   table: noop,
-  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,
-  text: /^[^\n]+/
+  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def|math))+)\n*/,
+  text: /^[^\n]+/,
+  math: /^ *(\${2,}) *([\s\S]+?)\s*\1 *(?:\n+|$)/
 };
 
 block.bullet = /(?:[*+-]|\d+\.)/;
@@ -35,7 +37,12 @@ block.item = replace(block.item, 'gm')
 
 block.list = replace(block.list)
   (/bull/g, block.bullet)
-  ('hr', /\n+(?=(?: *[-*_]){3,} *(?:\n+|$))/)
+  ('hr', '\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))')
+  ('def', '\\n+(?=' + block.def.source + ')')
+  ();
+
+block.blockquote = replace(block.blockquote)
+  ('def', block.def)
   ();
 
 block._tag = '(?!(?:'
@@ -57,6 +64,7 @@ block.paragraph = replace(block.paragraph)
   ('blockquote', block.blockquote)
   ('tag', '<' + block._tag)
   ('def', block.def)
+  ('math', block.math)
   ();
 
 /**
@@ -70,6 +78,7 @@ block.normal = merge({}, block);
  */
 
 block.gfm = merge({}, block.normal, {
+  task: /^(\s*\[[x ]\][^\n]+\n)+\n*/,
   fences: /^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,
   paragraph: /^/
 });
@@ -89,6 +98,7 @@ block.tables = merge({}, block.gfm, {
   table: /^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/
 });
 
+
 /**
  * Block Lexer
  */
@@ -105,6 +115,10 @@ function Lexer(options) {
     } else {
       this.rules = block.gfm;
     }
+  }
+
+  if (!this.options.mathjax) {
+    this.rules.math = noop;
   }
 }
 
@@ -141,7 +155,7 @@ Lexer.prototype.lex = function(src) {
  * Lexing
  */
 
-Lexer.prototype.token = function(src, top) {
+Lexer.prototype.token = function(src, top, bq) {
   var src = src.replace(/^ +$/gm, '')
     , next
     , loose
@@ -184,6 +198,16 @@ Lexer.prototype.token = function(src, top) {
         type: 'code',
         lang: cap[2],
         text: cap[3]
+      });
+      continue;
+    }
+
+    // math
+    if (cap = this.rules.math.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'math',
+        text: cap[2]
       });
       continue;
     }
@@ -264,7 +288,7 @@ Lexer.prototype.token = function(src, top) {
       // Pass `top` to keep the current
       // "toplevel" state. This is exactly
       // how markdown.pl works.
-      this.token(cap, top);
+      this.token(cap, top, true);
 
       this.tokens.push({
         type: 'blockquote_end'
@@ -333,7 +357,7 @@ Lexer.prototype.token = function(src, top) {
         });
 
         // Recurse.
-        this.token(item, false);
+        this.token(item, false, bq);
 
         this.tokens.push({
           type: 'list_item_end'
@@ -361,13 +385,40 @@ Lexer.prototype.token = function(src, top) {
     }
 
     // def
-    if (top && (cap = this.rules.def.exec(src))) {
+    if ((!bq && top) && (cap = this.rules.def.exec(src))) {
       src = src.substring(cap[0].length);
       this.tokens.links[cap[1].toLowerCase()] = {
         href: cap[2],
         title: cap[3]
       };
       continue;
+    }
+
+    // task (gfm)
+    if (top && (cap = this.rules.task.exec(src))) {
+      src = src.substring(cap[0].length);
+
+      this.tokens.push({
+        type: 'task_list_start'
+      });
+
+      cap[0] = cap[0].replace(/^\s+|\s+$/g, '');
+      cap = cap[0].split(/\n+/);
+
+      i = 0;
+      l = cap.length;
+
+      for (; i < l; i++) {
+        this.tokens.push({
+          type: 'task_item',
+          checked: /^\s*\[x\]/.test(cap[i]),
+          text: cap[i].replace(/^\s*\[[x ]\]\s*/, '')
+        });
+      }
+
+      this.tokens.push({
+        type: 'task_list_end'
+      });
     }
 
     // table (gfm)
@@ -441,9 +492,9 @@ Lexer.prototype.token = function(src, top) {
  */
 
 var inline = {
-  escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
+  escape: /^\\([\\`*{}\[\]()#$+\-.!_>])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
-  localink: /^\[\[(.*)\]\]/,
+  localink: /^\[\[((?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*)\]\]/, //  /^\[\[(.*)\]\]/, 
   url: noop,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
   link: /^!?\[(inside)\]\(href\)/,
@@ -454,7 +505,8 @@ var inline = {
   code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
   br: /^ {2,}\n(?!\s*$)/,
   del: noop,
-  text: /^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/
+  text: /^[\s\S]+?(?=[\\<!\[_*`$]| {2,}\n|$)/,
+  math: /^\$\s*([\s\S]*?[^\$])\s*\$(?!\$)/
 };
 
 inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
@@ -532,6 +584,10 @@ function InlineLexer(links, options) {
   } else if (this.options.pedantic) {
     this.rules = inline.pedantic;
   }
+
+  if (!this.options.mathjax) {
+    this.rules.math = noop;
+  }
 }
 
 /**
@@ -583,18 +639,18 @@ InlineLexer.prototype.output = function(src) {
       out += this.renderer.link(href, null, text);
       continue;
     }
-	
-	//localink
+
+    //localink
     if (cap = this.rules.localink.exec(src)) {
-      src = src.substring(cap[0].length);
-      text = escape(cap[1]);
-      href = text;
-      out += this.renderer.link(href, null, text);
-      continue;
+        src = src.substring(cap[0].length);
+        text = escape(cap[1]);
+        href = text;
+        out += this.renderer.link(href, null, text);
+        continue;
     }
-	
+
     // url (gfm)
-    if (cap = this.rules.url.exec(src)) {
+    if (!this.inLink && (cap = this.rules.url.exec(src))) {
       src = src.substring(cap[0].length);
       text = escape(cap[1]);
       href = text;
@@ -604,6 +660,11 @@ InlineLexer.prototype.output = function(src) {
 
     // tag
     if (cap = this.rules.tag.exec(src)) {
+      if (!this.inLink && /^<a /i.test(cap[0])) {
+        this.inLink = true;
+      } else if (this.inLink && /^<\/a>/i.test(cap[0])) {
+        this.inLink = false;
+      }
       src = src.substring(cap[0].length);
       out += this.options.sanitize
         ? escape(cap[0])
@@ -614,10 +675,12 @@ InlineLexer.prototype.output = function(src) {
     // link
     if (cap = this.rules.link.exec(src)) {
       src = src.substring(cap[0].length);
+      this.inLink = true;
       out += this.outputLink(cap, {
         href: cap[2],
         title: cap[3]
       });
+      this.inLink = false;
       continue;
     }
 
@@ -632,7 +695,9 @@ InlineLexer.prototype.output = function(src) {
         src = cap[0].substring(1) + src;
         continue;
       }
+      this.inLink = true;
       out += this.outputLink(cap, link);
+      this.inLink = false;
       continue;
     }
 
@@ -654,6 +719,13 @@ InlineLexer.prototype.output = function(src) {
     if (cap = this.rules.code.exec(src)) {
       src = src.substring(cap[0].length);
       out += this.renderer.codespan(escape(cap[2], true));
+      continue;
+    }
+
+    // math
+    if (cap = this.rules.math.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.math(cap[1], 'math/tex', false); //FIXME: filter <script> & </script>
       continue;
     }
 
@@ -773,6 +845,21 @@ Renderer.prototype.code = function(code, lang, escaped) {
     + '\n</code></pre>\n';
 };
 
+Renderer.prototype.tasklist = function(text) {
+  return '<ul class="task-list">\n' + text + '</ul>\n';
+};
+
+Renderer.prototype.taskitem = function(text, checked, disabled, i) {
+  return '<li class="task-list-item"><label>'
+    + '<input type="checkbox"'
+    + ' class="task-list-item-checkbox"'
+    + ' data-item-index="' + i + '"'
+    + ' data-item-complete="' + (checked ? 1 : 0) + '"'
+    + (disabled ? ' disabled=""' : '') + '>'
+    + ' ' + text
+    + '</label></li>';
+};
+
 Renderer.prototype.blockquote = function(quote) {
   return '<blockquote>\n' + quote + '</blockquote>\n';
 };
@@ -834,6 +921,11 @@ Renderer.prototype.tablecell = function(content, flags) {
   return tag + content + '</' + type + '>\n';
 };
 
+Renderer.prototype.math = function(content, language, display) {
+  mode = display ? '; mode=display' : '';
+  return '<script type="' + language + mode + '">' + content + '</script>';
+}
+
 // span level renderer
 Renderer.prototype.strong = function(text) {
   return '<strong>' + text + '</strong>';
@@ -868,16 +960,16 @@ Renderer.prototype.link = function(href, title, text) {
       return '';
     }
   }
-//   /^([^:]+):\/\/([-\w._]+)(\/[-\w._]\?(.+)?)?$/ig
-//   /|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i/
-//    (http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?
-var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
-var datePattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/; 
-  if(!href.match(urlPattern)) { href.split('.md').length<2 ? href=href+'.md' : 0;
-  	if (indxarr.indexOf(href)!=-1) var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")'; 
-  	else var out = '<a class="italicsf" href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
-  	}
-  else   var out = '<a href="' + href + '" target="_blank"';
+    // /^([^:]+):\/\/([-\w._]+)(\/[-\w._]\?(.+)?)?$/ig
+    // /|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i/
+    // (http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?
+    var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
+    var datePattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    if(!href.match(urlPattern)) { href.split('.md').length<2 ? href=href+'.md' : 0;
+    if (indxarr.indexOf(href)!=-1) var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
+    else var out = '<a class="italicsf" href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
+    }
+    else var out = '<a href="' + href + '" target="_blank"';
 
   if (title) {
     out += ' title="' + title + '"';
@@ -985,6 +1077,23 @@ Parser.prototype.tok = function() {
       return this.renderer.code(this.token.text,
         this.token.lang,
         this.token.escaped);
+    }
+    case 'task_list_start': {
+      var body = ''
+        , i = 1;
+
+      while (this.next().type !== 'task_list_end') {
+        body += this.renderer.taskitem(
+          this.inline.output(this.token.text),
+          this.token.checked,
+          this.token.disabled,
+          i++);
+      }
+
+      return this.renderer.tasklist(body);
+    }
+    case 'math': {
+      return this.renderer.math(this.token.text, 'math/tex', true);
     }
     case 'table': {
       var header = ''
@@ -1239,7 +1348,8 @@ marked.defaults = {
   smartypants: false,
   headerPrefix: '',
   renderer: new Renderer,
-  xhtml: false
+  xhtml: false,
+  mathjax: false
 };
 
 /**
@@ -1270,3 +1380,4 @@ if (typeof exports === 'object') {
 }).call(function() {
   return this || (typeof window !== 'undefined' ? window : global);
 }());
+
