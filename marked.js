@@ -854,7 +854,7 @@ Renderer.prototype.taskitem = function(text, checked, disabled, i) {
     + '<input type="checkbox"'
     + ' class="task-list-item-checkbox"'
     + ' data-item-index="' + i + '"'
-    + ' data-item-complete="' + (checked ? 1 : 0) + '"'
+    + ' data-item-complete="' + (checked ? 1 : 0) + '"' + (checked ? ' checked' : ' ')
     + (disabled ? ' disabled=""' : '') + '>'
     + ' ' + text
     + '</label></li>';
