@@ -18,6 +18,7 @@ var indxarr=[];
 var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
 var breadcrumbsdiv=document.querySelector("#breadcrumbs");
+var relatednotesdiv=document.querySelector("#relatednotes");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
@@ -83,7 +84,16 @@ var hammertime = Hammer(mrkd.parentElement).on("pinchin", function(event) {
 flpcrd('breadcrumbs');
 });
 
+var hammertime = Hammer(mrkd.parentElement).on("pinchout", function(event) {
+flpcrd('relatednotes');
+
+});
+
 var hammertime = Hammer(breadcrumbsdiv.parentElement).on("pinchout", function(event) {
+remoteStorage.mcnotes.readFile(cfile);
+});
+
+var hammertime = Hammer(relatednotesdiv.parentElement).on("pinchin", function(event) {
 remoteStorage.mcnotes.readFile(cfile);
 });
 
@@ -103,9 +113,12 @@ if(flipbx.selectedIndex==card.view){
 	else if (e.keyCode == '66') { // right arrow
 	flpcrd('breadcrumbs');
     }
+	else if (e.keyCode == '83') { // right arrow
+	flpcrd('relatednotes');
+    }
  }
 
-if(flipbx.selectedIndex==card.breadcrumbs){
+if(flipbx.selectedIndex==card.breadcrumbs || flipbx.selectedIndex==card.relatednotes){
 	if (e.keyCode == '86') { // right arrow
 	remoteStorage.mcnotes.readFile(cfile);
     }
@@ -151,7 +164,8 @@ view:2,
 settings:3,
 about:4,
 calendar:5,
-breadcrumbs:6
+breadcrumbs:6,
+relatednotes:7
 };
 document.addEventListener('DOMComponentsLoaded', function(){
 flipbx = document.querySelector('x-deck');
@@ -249,7 +263,7 @@ actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 document.querySelector('x-appbar').heading='calendar';
 }
-else if(crd=='breadcrumbs') {
+else if(crd=='breadcrumbs' || crd=='relatednotes') {
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 actionconl.innerHTML ='<i class="fa fa-arrow-left"></i>';

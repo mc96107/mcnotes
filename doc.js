@@ -49,6 +49,7 @@ privateClient.declareType('index', {
 	mrkd.innerHTML=marked(file.data);
 	flpcrd('view');
 	breadfun(f);
+	relatedfun(f);
 	var fa=f.split('/');
 	document.querySelector('x-appbar').heading=f.split('.md')[0];//fa[fa.length-1]
 	edtr.dispatchEvent(eventrf);
@@ -57,7 +58,7 @@ privateClient.declareType('index', {
 	},
 	searchdoc: function(f,b,ul){
 	privateClient.getFile(f).then(function(file) {
-		if(file.data.indexOf(b)!=-1) ul.appendChild(readflls(f));
+		if(file.data && file.data.indexOf(b)!=-1) ul.appendChild(readflls(f));
 		else return false;
 		});
 	},
@@ -76,6 +77,7 @@ privateClient.declareType('index', {
 	//remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
 	breadfun(f);
+	relatedfun(f);
 	edtr.value=t;
 	flpcrd('edit');
 	var fa=f.split('/');
@@ -226,4 +228,10 @@ function breadfun(f){
 	}
 	document.querySelector("#breadcrumbs").innerHTML='';
 	document.querySelector("#breadcrumbs").appendChild(ul);
+}
+
+function relatedfun(f){
+var title=f.split('.md')[0];
+//console.log(title);
+srchfn(indxarr,title,relatednotesdiv);
 }
