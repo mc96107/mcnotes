@@ -11,9 +11,9 @@ var yyyyb = todayb.getFullYear();
 
 
 
- var bookmarkprompt = prompt('new file',url);
+ var bookmarkprompt = prompt('title');
  if (bookmarkprompt) remoteStorage.mcnotes.writeFile('bookmarks/'+yyyyb+'/'+mmb+'/'+ddb+'/'+bookmarkprompt+'.md',url);
 else 
-remoteStorage.mcnotes.writeFile('bookmarks/'+yyyyb+'/'+mmb+'/'+ddb+'/'+url+'.md',url);
+remoteStorage.mcnotes.writeFile('bookmarks/'+yyyyb+'/'+mmb+'/'+ddb+'/'+url.split('/')[2]+'.md',url);
 });
 }
