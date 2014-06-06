@@ -104,10 +104,10 @@ function checkKey(e) {
     e = e || window.event;
 if(flipbx){
 if(flipbx.selectedIndex==card.view){
-    if (e.keyCode == '37') { // left arrow
+    if (e.keyCode == '37' && e.ctrlKey) { // left arrow
 	remoteStorage.mcnotes.readFile(chckdr(cfile,-1));
     }
-    else if (e.keyCode == '39') { // right arrow
+    else if (e.keyCode == '39' && e.ctrlKey) { // right arrow
 	remoteStorage.mcnotes.readFile(chckdr(cfile,1));
     }
 	else if (e.keyCode == '66') { // right arrow
