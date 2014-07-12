@@ -979,12 +979,23 @@ Renderer.prototype.link = function(href, title, text) {
 };
 
 Renderer.prototype.image = function(href, title, text) {
+    if(text){
+      var out = '<figure><img src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? '/>' : '>';
+  out += '<figcaption>'+text+'</figcaption></figure>'
+    return out;
+    }
+    else{
   var out = '<img src="' + href + '" alt="' + text + '"';
   if (title) {
     out += ' title="' + title + '"';
   }
   out += this.options.xhtml ? '/>' : '>';
   return out;
+  }
 };
 
 /**
