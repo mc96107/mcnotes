@@ -26,6 +26,22 @@ textarea {
     -moz-box-sizing: border-box;
 }
 #mrkd{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+table{width: 100%}
+td,#relatednotesside {
+    vertical-align: top;
+}
+
+@media (max-width: 479px) {
+#relatednotesside{display: none;}
+}
+
+@media (min-width: 480px) {
+#relatednotesside{min-width: 200px;width: 30%;}
+#relatednotesside > * .isnotDir {background-color: #eee;}
+#mrkd{width:70%;}
+}
+
 #about{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
 .forange{color:#E66000;}
 .florange{color:#FF9500;}

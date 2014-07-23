@@ -233,5 +233,6 @@ function breadfun(f){
 function relatedfun(f){
 var title=f.split('.md')[0];
 //console.log(title);
+srchfn(indxarr,title,relatednotesside);
 srchfn(indxarr,title,relatednotesdiv);
 }

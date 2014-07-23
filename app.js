@@ -19,6 +19,7 @@ var edtr=document.querySelector("#edtr");
 var mrkd=document.querySelector("#mrkd");
 var breadcrumbsdiv=document.querySelector("#breadcrumbs");
 var relatednotesdiv=document.querySelector("#relatednotes");
+var relatednotesside=document.querySelector("#relatednotesside");
 var actioncon=document.querySelector("#actioncon");
 var actionconl=document.querySelector("#actionconl");
 var nav=document.querySelector("#nav");
@@ -332,12 +333,13 @@ if (e.className==c1) e.className=c2;
 else e.className=c1;
 }
 
+
 function srchfn(a,b,p){
 p.innerHTML='';
 var ul = document.createElement("UL");
 for (var i = 0; i < a.length; i++) {
 if (a[i].slice(-1)!='/'){
-if(a[i].indexOf(b)!=-1) ul.appendChild(readflls(a[i]));
+if(a[i].indexOf(b)!=-1 && a[i] != cfile) ul.appendChild(readflls(a[i]));
 else remoteStorage.mcnotes.searchdoc(a[i],b,ul);
 }
 }
@@ -355,7 +357,7 @@ function readflls(item){
 	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
-
+if(!cfile){
 	var x=document.createElement('button'); 
 	x.innerHTML='<i class="fa fa-times"></i>';
 	x.t=item;
@@ -363,6 +365,7 @@ function readflls(item){
 	else x.onclick=function(){if(confirm("remove "+this.t+" ?")) remoteStorage.mcnotes.rmdir(this.t);};
 	x.className='endoftheline';
 	li.appendChild(x);
+}
 	if(item.slice(-1)=='/') {
 		if(localStorage.getItem(item)) li.className=localStorage.getItem(item);
 		else li.className='isDir';

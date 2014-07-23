@@ -58,16 +58,25 @@
 	<x-card style="overflow:scroll;">
 	<textarea id="edtr" class="editor" onchange="pinput();"></textarea>
 	</x-card>
-	<x-card style="overflow:scroll;">
-	<div id="mrkd" class="container"></div>
+	<x-card style="overflow:scroll;"><table>
+    <tr>
+	<td id="mrkd" class="container"></td>
+    <td id="relatednotesside" data-type="list"></td></tr>
+    </table>
 	</x-card>
 	<x-card style="overflow:scroll;">
 	<div id="rswd"></div>
 	<div id="installdiv"></div>
+    
     <div id="actionsettings">
-	<button onclick="refreshlist();flpcrd('list');"><i class="fa fa-list-alt"></i> refresh list</button>
+    <button onclick="refreshlist();flpcrd('list');"><i class="fa fa-list-alt"></i> refresh list</button>
+    <button onclick="if(confirm('close?')) window.close();"><i class="fa fa-power-off"></i> close app</button>
+	<!--
+    <x-toggle id="apprunning" label="keep app runing" group="group-demo"></x-toggle>
+    
 	<button onclick="remoteStorage.remote.fetchDelta();"><i class="fa fa-refresh"></i> refresh cached data</button>
-	<button onclick="if(confirm('close?')) window.close();"><i class="fa fa-power-off"></i> close app</button>
+	
+    -->
 	</div>
 	</x-card>
 	<x-card style="overflow:scroll;">
