@@ -108,7 +108,7 @@ remoteStorage.setApiKeys('dropbox', {api_key: 'kgpcm1nmvoo59z8'});
 //remoteStorage.setApiKeys('googledrive', {client_id: '244222371468-mv7b7aro2ljt4ln6jr5viunmrq2ah9ql.apps.googleusercontent.com'});
 if (localStorage.getItem('ini')=='1') {localStorage.setItem('ini','2');location.reload();}//dropbox auth ini
 document.addEventListener('DOMComponentsLoaded', function(){
-remoteStorage.displayWidget("rswd");
+remoteStorage.displayWidget({domID:"rswd"});
 //remoteStorage.mcnotes.readdir('',list);
 });
 
