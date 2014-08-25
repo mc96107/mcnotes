@@ -982,7 +982,7 @@ Renderer.prototype.image = function(href, title, text) {
     if(text){
       var out = '<figure><img src="' + href + '" alt="' + text + '"';
   if (title) {
-    out += ' title="' + title + '"';
+    out += ' width="' + title + '"';
   }
   out += this.options.xhtml ? '/>' : '>';
   out += '<figcaption>'+text+'</figcaption></figure>'
