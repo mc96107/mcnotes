@@ -199,7 +199,7 @@ actionconl.innerHTML ='<i class="fa fa-eye"></i>';
 actionconl.onclick=function() {flpcrd('view')};
 }
 else if(crd=='view') {
-M.parseMath(mrkd);
+//M.parseMath(mrkd);
 if(frmclndr){
 actioncon.innerHTML ='<i class="fa fa-calendar"></i>';
 actioncon.onclick=function() {flpcrd('calendar')};

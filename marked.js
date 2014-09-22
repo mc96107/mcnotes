@@ -725,7 +725,7 @@ InlineLexer.prototype.output = function(src) {
     // math
     if (cap = this.rules.math.exec(src)) {
       src = src.substring(cap[0].length);
-      out += this.renderer.math(cap[1], 'math/tex', false); //FIXME: filter <script> & </script>
+      out += katex.renderToString(cap); //FIXME: filter <script> & </script>
       continue;
     }
 
@@ -921,9 +921,8 @@ Renderer.prototype.tablecell = function(content, flags) {
   return tag + content + '</' + type + '>\n';
 };
 
-Renderer.prototype.math = function(content, language, display) {
-  mode = display ? '; mode=display' : '';
-  return '<script type="' + language + mode + '">' + content + '</script>';
+Renderer.prototype.math = function(content) {
+  return katex.renderToString(content);
 }
 
 // span level renderer
@@ -1362,7 +1361,7 @@ marked.defaults = {
   headerPrefix: '',
   renderer: new Renderer,
   xhtml: false,
-  mathjax: false
+  mathjax: true
 };
 
 /**
