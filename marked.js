@@ -965,10 +965,12 @@ Renderer.prototype.link = function(href, title, text) {
     var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
     var datePattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
     var telPattern = /^tel:((?:[\+|\d][\d().-]*\d[\d().-]*|[0-9A-F*#().-]*[0-9A-F*#][0-9A-F*#().-]*(?:;[a-z\d-]+(?:=(?:[a-z\d\[\]\/:&+$_!~*'().-]|%[\dA-F]{2})+)?)*;phone-context=(?:\+[\d().-]*\d[\d().-]*|(?:[a-z0-9]\.|[a-z0-9][a-z0-9-]*[a-z0-9]\.)*(?:[a-z]|[a-z][a-z0-9-]*[a-z0-9])))(?:;[a-z\d-]+(?:=(?:[a-z\d\[\]\/:&+$_!~*'().-]|%[\dA-F]{2})+)?)*(?:,(?:\+[\d().-]*\d[\d().-]*|[0-9A-F*#().-]*[0-9A-F*#][0-9A-F*#().-]*(?:;[a-z\d-]+(?:=(?:[a-z\d\[\]\/:&+$_!~*'().-]|%[\dA-F]{2})+)?)*;phone-context=\+[\d().-]*\d[\d().-]*)(?:;[a-z\d-]+(?:=(?:[a-z\d\[\]\/:&+$_!~*'().-]|%[\dA-F]{2})+)?)*)*)$/;
-    if(!href.match(urlPattern) && !href.match(telPattern)) { href.split('.md').length<2 ? href=href+'.md' : 0;
+    var emailPattern = /^([^ >]+(@)[^ >]+)/;
+    if(!href.match(urlPattern) && !href.match(telPattern) && !href.match(emailPattern)) { href.split('.md').length<2 ? href=href+'.md' : 0;
     if (indxarr.indexOf(href)!=-1) var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
     else var out = '<a class="italicsf" href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
     }
+    else if (href.match(emailPattern)) var out = '<a href="mailto:' + href + '" target="_blank"';
     else if (href.match(telPattern)) var out = '<a href="' + href + '" target="_blank"';
     else var out = '<a href="' + href + '" target="_blank"';
 
