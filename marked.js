@@ -970,6 +970,7 @@ Renderer.prototype.link = function(href, title, text) {
     if (indxarr.indexOf(href)!=-1) var out = '<a href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
     else var out = '<a class="italicsf" href="' + '#' + '"'+ 'onclick=remoteStorage.mcnotes.readFile("'+href+'")';
     }
+    else if (href.match(urlPattern)) var out =  '<a href="' + href + '" target="_blank"';
     else if (href.match(emailPattern)) var out = '<a href="mailto:' + href + '" target="_blank"';
     else if (href.match(telPattern)) var out = '<a href="' + href + '" target="_blank"';
     else var out = '<a href="' + href + '" target="_blank"';
