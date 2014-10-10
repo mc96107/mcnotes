@@ -187,6 +187,7 @@ flipbx.showCard(card[crd]);
 else flipbx.showCard(card.map);*/
 flipbx.showCard(card[crd]);
 if(crd=='edit') {
+/*
 if(frmclndr){
 actioncon.innerHTML ='<i class="fa fa-calendar"></i>';
 actioncon.onclick=function() {flpcrd('calendar')};
@@ -195,6 +196,21 @@ else {
 actioncon.innerHTML ='<i class="fa fa-list-ul"></i>';
 actioncon.onclick=function() {flpcrd('list')};
 }
+*/
+
+actioncon.innerHTML ='<i class="fa fa-terminal"></i>';
+actioncon.onclick=function() {
+ var sPattern = /\{\{([^)]+)\}\}/;
+var str = edtr.value.match(sPattern)[1];
+var indxarrr=0; 
+var indxarri = 0; 
+do { 
+if(indxarr[indxarri].indexOf(str)!=-1 && indxarr[indxarri].slice(-1)!='/') {indxarrr=indxarr[indxarri]; }indxarri+=1;
+}while(indxarri<indxarr.length && !indxarrr); 
+if(indxarrr) {edtr.value=edtr.value.replace(sPattern,'[['+indxarrr+']]');pinput();}
+
+};
+
 actionconl.innerHTML ='<i class="fa fa-eye"></i>';
 actionconl.onclick=function() {flpcrd('view')};
 }
