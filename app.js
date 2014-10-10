@@ -200,7 +200,7 @@ actioncon.onclick=function() {flpcrd('list')};
 
 actioncon.innerHTML ='<i class="fa fa-terminal"></i>';
 actioncon.onclick=function() {
- var sPattern = /\{\{([^)]+)\}\}/;
+ var sPattern = /\{\{([^)!}]+)\}\}/;
 var str = edtr.value.match(sPattern)[1];
 var indxarrr=0; 
 var indxarri = 0; 
