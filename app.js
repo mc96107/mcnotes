@@ -207,7 +207,7 @@ var indxarri = 0;
 do { 
 if(indxarr[indxarri].indexOf(str)!=-1 && indxarr[indxarri].slice(-1)!='/') {indxarrr=indxarr[indxarri]; }indxarri+=1;
 }while(indxarri<indxarr.length && !indxarrr); 
-if(indxarrr) {edtr.value=edtr.value.replace(sPattern,'[['+indxarrr+']]');pinput();}
+if(indxarrr) {edtr.value=edtr.value.replace(sPattern,'[['+indxarrr.split('.md')[0]+']]');pinput();}
 
 };
 
