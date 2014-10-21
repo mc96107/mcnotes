@@ -1,7 +1,7 @@
 if(!RemoteStorage) {RemoteStorage = remoteStorage;}
 RemoteStorage.defineModule('mcnotes', function(privateClient, publicClient) {
 //privateClient.cache('');
-var util = remoteStorage.util;
+var util = RemoteStorage.util;
   function rmRf(path) {
     if(util.isFolder(path)) {
       return privateClient.getListing(path).then(function(items) {
