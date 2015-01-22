@@ -28,6 +28,7 @@ privateClient.declareType('index', {
 
   return {
     exports: {
+    on: privateClient.on,
 	//checkdir: function(p){return privateClient.getListing(p).then(function(objects){for(var item in objects) console.log(item);});},
 	readdir: function(path,parent){privateClient.getListing(path).then(function(objects) {
 		var ul = document.createElement("UL");
@@ -70,6 +71,12 @@ privateClient.declareType('index', {
 	remoteStorage.mcnotes.writeFile('bookmarks.md',bookmarks);
 	});},
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
+	cwriteFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
+	    refreshlist();alert('conflicted copy, please reconnect');flpcrd('settings');
+	   // var confl = confirm('conflicted copy, reconnect?');
+       // if (confl) {remoteStorage.disconnect();flpcrd('settings');}
+	    });
+	},
 	createFile: function(f,t){
 	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
 	if (indxarr.indexOf(f)==-1){
@@ -111,7 +118,12 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget({domID:"rswd"});
 //remoteStorage.mcnotes.readdir('',list);
 });
-
+remoteStorage.mcnotes.on('change', function (evt) {
+  if(evt.origin === 'conflict') {
+    //console.log('conflict');console.log(evt);
+    console.log(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md');
+    remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue)};
+});
 //check periodically for syncing not completing and resolve
 var intervalDelta = window.setInterval(checksyncing, 5*60*1000);
 function checksyncing(){
@@ -202,7 +214,7 @@ function syncrefreshlista(){
 var timeoutIDD = window.setTimeout(synclista, 1000);
 
 function synclista(){
-if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
+if (remoteStorage.sync && synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;}
 else {window.clearTimeout(timeoutIDD);
 timeoutIDD = window.setTimeout(synclista, 1000);
 }
