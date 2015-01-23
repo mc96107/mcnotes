@@ -72,8 +72,7 @@ privateClient.declareType('index', {
 	});},
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
 	cwriteFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
-	    refreshlist();
-        //alert('conflicted copy, please reconnect');flpcrd('settings');
+	    refreshlist();//alert('conflicted copy, please reconnect');flpcrd('settings');
 	   // var confl = confirm('conflicted copy, reconnect?');
        // if (confl) {remoteStorage.disconnect();flpcrd('settings');}
 	    });
@@ -124,8 +123,10 @@ remoteStorage.displayWidget({domID:"rswd"});
 remoteStorage.mcnotes.on('change', function (evt) {
   if(evt.origin === 'conflict') {
     //console.log('conflict');console.log(evt);
-    console.log(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md');
-    //remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue)};
+    if (evt.newValue == ' ') window.setTimeout(function(){console.log('retry');remoteStorage.mcnotes.writeFile(evt.path.split('/mcnotes/')[1],evt.oldValue);},2000);
+    else 
+    remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue);
+}
 });
 //check periodically for syncing not completing and resolve
 var intervalDelta = window.setInterval(checksyncing, 5*60*1000);
