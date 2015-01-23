@@ -124,7 +124,7 @@ remoteStorage.mcnotes.on('change', function (evt) {
   if(evt.origin === 'conflict') {
     //console.log('conflict');console.log(evt);
     console.log(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md');
-    remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue)};
+    //remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue)};
 });
 //check periodically for syncing not completing and resolve
 var intervalDelta = window.setInterval(checksyncing, 5*60*1000);
