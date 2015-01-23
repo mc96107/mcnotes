@@ -72,7 +72,7 @@ privateClient.declareType('index', {
 	});},
 	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
 	cwriteFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
-	    refreshlist();alert('conflicted copy, please reconnect');flpcrd('settings');
+	    refreshlist();//alert('conflicted copy, please reconnect');flpcrd('settings');
 	   // var confl = confirm('conflicted copy, reconnect?');
        // if (confl) {remoteStorage.disconnect();flpcrd('settings');}
 	    });
