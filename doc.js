@@ -1,3 +1,4 @@
+var retries = 0;
 if(!RemoteStorage) {RemoteStorage = remoteStorage;}
 RemoteStorage.defineModule('mcnotes', function(privateClient, publicClient) {
 //privateClient.cache('');
@@ -70,7 +71,7 @@ privateClient.declareType('index', {
 	bookmarks=bookmarks+'  \n* '+url;
 	remoteStorage.mcnotes.writeFile('bookmarks.md',bookmarks);
 	});},
-	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t);},
+	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){retries = 0;});},
 	cwriteFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
 	    refreshlist();//alert('conflicted copy, please reconnect');flpcrd('settings');
 	   // var confl = confirm('conflicted copy, reconnect?');
@@ -120,7 +121,6 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget({domID:"rswd"});
 //remoteStorage.mcnotes.readdir('',list);
 });
-var retries = 0;
 remoteStorage.mcnotes.on('change', function (evt) {
   if(evt.origin === 'conflict') {
     //console.log('conflict');console.log(evt);
