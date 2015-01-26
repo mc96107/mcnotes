@@ -120,12 +120,16 @@ document.addEventListener('DOMComponentsLoaded', function(){
 remoteStorage.displayWidget({domID:"rswd"});
 //remoteStorage.mcnotes.readdir('',list);
 });
+var retries = 0;
 remoteStorage.mcnotes.on('change', function (evt) {
   if(evt.origin === 'conflict') {
     //console.log('conflict');console.log(evt);
-    if (evt.newValue == ' ') window.setTimeout(function(){console.log('retry');remoteStorage.mcnotes.writeFile(evt.path.split('/mcnotes/')[1],evt.oldValue);},2000);
-    else 
-    remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue);
+    //if (evt.newValue == ' ') 
+    if (retries < 3) {
+    window.setTimeout(function(){console.log('retry');remoteStorage.mcnotes.writeFile(evt.path.split('/mcnotes/')[1],evt.oldValue);},2000);retries++;
+    }
+    else {retries=0;
+    remoteStorage.mcnotes.cwriteFile(evt.path.split('/mcnotes/')[1].split('.md')[0]+'_conflict'+'.md',evt.oldValue);}
 }
 });
 //check periodically for syncing not completing and resolve
