@@ -40,6 +40,19 @@ td,#relatednotesside {
 #relatednotesside{min-width: 200px;width: 30%;}
 #relatednotesside > * .isnotDir {background-color: #eee;}
 #mrkd{width:70%;}
+#list{
+    width:70%;
+    margin-right: 2%;
+    float: left;
+}
+#searchdiv{	
+    width:28%;
+    display:block;
+    float: left;
+}
+
+#clearsrchformbtnn{visibility: hidden;}
+#searchbtn{display: none;}
 }
 
 #about{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}

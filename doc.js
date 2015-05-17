@@ -1,4 +1,5 @@
 var retries = 0;
+var timeoutIDx; 
 if(!RemoteStorage) {RemoteStorage = remoteStorage;}
 RemoteStorage.defineModule('mcnotes', function(privateClient, publicClient) {
 //privateClient.cache('');
@@ -37,6 +38,9 @@ privateClient.declareType('index', {
 		var ijk=0;
 		for(var item in objects) {
 		indxarr.push(path+item);
+	    if((path+item).slice(-1)!='/') {
+    		remoteStorage.mcnotes.indexer(path+item);
+        }
 		ul.appendChild(readfll(path+item));
 		ijk=ijk+1;
 		  }
@@ -64,6 +68,21 @@ privateClient.declareType('index', {
 		else return false;
 		});
 	},
+	indexer: function(path){
+		privateClient.getFile(path).then(function(file) {
+		        var doc = {
+		        	    "title": path,
+		    			"body": file.data,
+		    			"id": path
+		        	};
+		        idx.add(doc);
+		        document.querySelector("#listsearchres").innerHTML = '<br><center><i class="fa fa-cog fa-spin fa-5x"></i></center>';
+		        document.querySelector("#listsearchres").style.color = "#A3A3A3";
+		        window.clearTimeout(timeoutIDx);
+		        timeoutIDx = window.setTimeout(function(){document.querySelector("#listsearchres").innerHTML = '';},1000);
+		     //   console.log(doc);
+	        });
+	},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
 	if(file.data) var bookmarks=file.data;
@@ -71,7 +90,14 @@ privateClient.declareType('index', {
 	bookmarks=bookmarks+'  \n* '+url;
 	remoteStorage.mcnotes.writeFile('bookmarks.md',bookmarks);
 	});},
-	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){retries = 0;});},
+	writeFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
+		idx.add({
+	        	    "title": p,
+	    			"body": t,
+	    			"id": p
+	    		});
+		retries = 0;
+	});},
 	cwriteFile: function(p,t){return privateClient.storeFile('text/plain', p, t).then(function(){
 	    refreshlist();//alert('conflicted copy, please reconnect');flpcrd('settings');
 	   // var confl = confirm('conflicted copy, reconnect?');
@@ -97,17 +123,20 @@ privateClient.declareType('index', {
 	}
 	else remoteStorage.mcnotes.readFile(f);
 	},
-	removeFile: function(f){privateClient.remove(f).then(function(){if(!synctmp) var timeoutID = window.setTimeout(function(){
+	removeFile: function(f){privateClient.remove(f).then(function(){
+		idx.remove({"id":f,"body":f,"title":f});
+		if(!synctmp) var timeoutID = window.setTimeout(function(){
         //remoteStorage.mcnotes.removeFile(f);
-        synctmp=1;syncrefreshlista();}, 5000);});},
-    	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
-    	//privateClient.storeFile('text/plain', p2, file.data);
-    	remoteStorage.mcnotes.writeFile(p2,file.data);
-    	remoteStorage.mcnotes.removeFile(p1);
-    	document.querySelector('x-appbar').heading=p2.split('.md')[0];
-    	});},
-    	rmdir: function(dir){rmRf(dir);}
-    	},
+        synctmp=1;syncrefreshlista();}, 5000);});
+	},
+	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
+	//privateClient.storeFile('text/plain', p2, file.data);
+	remoteStorage.mcnotes.writeFile(p2,file.data);
+	remoteStorage.mcnotes.removeFile(p1);
+	document.querySelector('x-appbar').heading=p2.split('.md')[0];
+	});},
+	rmdir: function(dir){rmRf(dir);}
+	},
       };
 });
 if (!localStorage.getItem('ini')) localStorage.setItem('ini','1');//dropbox auth ini
@@ -212,9 +241,21 @@ function colfl(path,item){if(item.slice(-1)=='/') {if(localStorage.getItem(path+
 function expfl(path,item){if(item.slice(-1)=='/') {if(localStorage.getItem(path+item)) localStorage.removeItem(path+item); remoteStorage.mcnotes.expand(path+item);}}
 function srch(t){}//search function regex filter array
 
+var idx = lunr(function () {
+    this.field('title', { boost: 10 })
+    this.field('body')
+    this.ref('id')
+});
 //var intervalID = window.setInterval(refreshlist, 60*1000);
 function refreshlist(){
 list.innerHTML='';remoteStorage.mcnotes.readdir('',list);
+/*
+	for (var i = 0; i < indxarr.length; i++) {
+        if(indxarr[i].slice(-1)!='/') {
+        	remoteStorage.mcnotes.indexer(indxarr[i]);
+        }
+    }
+    */
 //if(searchdiv.className=='hidden') list.className='';
 }
 
@@ -253,6 +294,6 @@ function breadfun(f){
 function relatedfun(f){
 var title=f.split('.md')[0];
 //console.log(title);
-srchfn(indxarr,title,relatednotesside);
-srchfn(indxarr,title,relatednotesdiv);
+srchfnidx(indxarr,title,relatednotesside);
+srchfnidx(indxarr,title,relatednotesdiv);
 }

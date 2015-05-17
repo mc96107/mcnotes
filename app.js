@@ -350,15 +350,27 @@ else e.className=c1;
 
 
 function srchfn(a,b,p){
-p.innerHTML='';
-var ul = document.createElement("UL");
-for (var i = 0; i < a.length; i++) {
-if (a[i].slice(-1)!='/'){
-if(a[i].indexOf(b)!=-1 && a[i] != cfile) ul.appendChild(readflls(a[i]));
-else remoteStorage.mcnotes.searchdoc(a[i],b,ul);
+	p.innerHTML='';
+	var ul = document.createElement("UL");
+	for (var i = 0; i < a.length; i++) {
+		if (a[i].slice(-1)!='/'){
+		if(a[i].indexOf(b)!=-1 && a[i] != cfile) ul.appendChild(readflls(a[i]));
+		else remoteStorage.mcnotes.searchdoc(a[i],b,ul);
+		}
+	}
+	p.appendChild(ul);
 }
-}
-p.appendChild(ul);
+
+function srchfnidx(a,b,p){
+	p.innerHTML='';
+	var ul = document.createElement("UL");
+	var arr = idx.search(b);
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i].ref != cfile){
+			ul.appendChild(readflls(arr[i].ref));
+		}
+	}
+	p.appendChild(ul);
 }
 
 function readflls(item){

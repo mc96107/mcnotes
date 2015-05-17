@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="lib/katex/katex.min.css">
 <script src="lib/katex/katex.min.js" type="text/javascript"></script>
-
+<script src="lib/lunr.js" type="text/javascript"></script>
 <!--
 	<link rel="stylesheet" href="lib/jqmath/jqmath-0.4.0.css">
 	<script src="lib/jqmath/jquery-1.4.3.min.js"></script>
@@ -50,15 +50,14 @@
 </ul></nav>
   <section>
 <x-deck>
-    <x-card style="overflow:scroll;">
-
+    <x-card style="overflow-y:scroll;overflow-x:hidden;">
+<div id="list" data-type="list" class=""></div>
 <div id="searchdiv" class="hidden">
 
 <!--<form action="" method="get">-->
-<div class="inputbox"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><input type="search" name="search" oninput="srchfn(indxarr,this.value,listsearchres)" placeholder="search" required /></div>
+<div class="inputbox"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><input type="search" name="search" oninput="srchfnidx(indxarr,this.value,listsearchres)" placeholder="search" required /></div>
 <!--<input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></form>-->
 <hr><div id="listsearchres" data-type="list" class=""></div></div>
-	<div id="list" data-type="list" class=""></div>
 	</x-card>
 	<x-card style="overflow:scroll;">
 	<textarea id="edtr" class="editor" onchange="pinput();"></textarea>
@@ -83,6 +82,7 @@
 	
     -->
 	</div>
+    	<!--<div id="cacher" class="hidden"></div>-->
 	</x-card>
 	<x-card style="overflow:scroll;">
 		<div id="about" class="container">
