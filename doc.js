@@ -50,7 +50,7 @@ privateClient.declareType('index', {
 	});},
 	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}});},
 	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}});},
-	readFile: function(f){if (indxarr.indexOf(f)!=-1) {privateClient.getFile(f).then(function(file) {
+	readFile: function(f){if (indxarr.indexOf(f)!=-1) {privateClient.getFile(f,false).then(function(file) {
 	cfile=f;
 	edtr.value=file.data;
 	mrkd.innerHTML=marked(file.data);
@@ -64,7 +64,7 @@ privateClient.declareType('index', {
 	else remoteStorage.mcnotes.createFile(f,'');
 	},
 	searchdoc: function(f,b,ul){
-	privateClient.getFile(f).then(function(file) {
+	privateClient.getFile(f,false).then(function(file) {
 		if(file.data && file.data.indexOf(b)!=-1) ul.appendChild(readflls(f));
 		else return false;
 		});
@@ -97,7 +97,7 @@ privateClient.declareType('index', {
         }*/
 	},
 	addbookmark: function(url){
-	privateClient.getFile('bookmarks.md').then(function(file) {
+	privateClient.getFile('bookmarks.md',false).then(function(file) {
 	if(file.data) var bookmarks=file.data;
 	else bookmarks='';
 	bookmarks=bookmarks+'  \n* '+url;
@@ -142,7 +142,7 @@ privateClient.declareType('index', {
         //remoteStorage.mcnotes.removeFile(f);
         synctmp=1;syncrefreshlista();}, 5000);});
 	},
-	mf: function(p1,p2){privateClient.getFile(p1).then(function(file){
+	mf: function(p1,p2){privateClient.getFile(p1,false).then(function(file){
 	//privateClient.storeFile('text/plain', p2, file.data);
 	remoteStorage.mcnotes.writeFile(p2,file.data);
 	remoteStorage.mcnotes.removeFile(p1);
