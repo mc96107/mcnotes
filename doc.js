@@ -138,9 +138,10 @@ privateClient.declareType('index', {
 	},
 	removeFile: function(f){privateClient.remove(f).then(function(){
 		idx.remove({"id":f,"body":f,"title":f});
-        if(f.slice(-1)=='/') var textnode=document.createTextNode(f.slice(0,f.length-1));
-        else var textnode=document.createTextNode(f.split('.md')[0]);
-        var frameid = document.getElementById(textnode);
+    var texttxt;
+	if(item.slice(-1)=='/') {texttxt=item.slice(0,item.length-1);}
+	else {texttxt=item.split('.md')[0];}
+        var frameid = document.getElementById(texttxt);
         if (frameid) {
             frameid.parentNode.removeChild(frameid);
         }
@@ -230,8 +231,9 @@ if (synctmp && remoteStorage.sync.done) {refreshlist();synctmp=0;console.log('sy
 function readfll(item){
 	var li = document.createElement("LI");
 	var a = document.createElement('a'); 
-	if(item.slice(-1)=='/') var textnode=document.createTextNode(item.slice(0,item.length-1));
-	else var textnode=document.createTextNode(item.split('.md')[0]);
+    var texttxt;
+	if(item.slice(-1)=='/') {var textnode=document.createTextNode(item.slice(0,item.length-1));texttxt=item.slice(0,item.length-1);}
+	else {var textnode=document.createTextNode(item.split('.md')[0]);texttxt=item.split('.md')[0];}
 	a.appendChild(textnode);
 	a.href = "#";
 	a.t=item;
