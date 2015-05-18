@@ -149,6 +149,7 @@ privateClient.declareType('index', {
         //remoteStorage.mcnotes.removeFile(f);
         synctmp=1;syncrefreshlista();}, 5000);});
         */
+        });
 	},
 	mf: function(p1,p2){privateClient.getFile(p1,false).then(function(file){
 	//privateClient.storeFile('text/plain', p2, file.data);
