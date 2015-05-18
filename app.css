@@ -34,9 +34,8 @@ td,#relatednotesside {
 
 #rotatingicon{
    position: absolute;
-   top: 0;
+   top: 150;
    left: 0;
-   bottom: 0;
    right: 0;
    z-index: -1;
    overflow: hidden;
@@ -60,7 +59,13 @@ td,#relatednotesside {
     display:block;
     float: left;
 }
-
+#rotatingicon{
+   position: absolute;
+   top: 150;
+   right: 100;
+   z-index: -1;
+   overflow: hidden;
+}
 #clearsrchformbtnn{visibility: hidden;}
 #searchbtn{display: none;}
 }

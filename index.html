@@ -55,9 +55,9 @@
 <div id="searchdiv" class="hidden">
 
 <!--<form action="" method="get">-->
-<div class="inputbox"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><input type="search" name="search" oninput="srchfnidx(indxarr,this.value,listsearchres)" placeholder="search" required /></div>
+<div class="inputbox"><button id="clearsrchformbtnn" class="btnclr fcharcoal" > </button><input type="search" name="search" oninput="srchfnidx(indxarr,this.value,listsearchresults)" placeholder="search" required /></div>
 <!--<input type="reset" class="fcharcoal" value="&#xf00d" alt="clear" /></form>-->
-<hr><div id="listsearchres" data-type="list" class=""><div id="rotatingicon"></div></div></div>
+<hr><div id="listsearchres"><div id="rotatingicon"></div><div id="listsearchresults"  data-type="list" class=""></div></div></div>
 	</x-card>
 	<x-card style="overflow:scroll;">
 	<textarea id="edtr" class="editor" onchange="pinput();"></textarea>
