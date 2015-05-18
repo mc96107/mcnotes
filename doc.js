@@ -139,6 +139,7 @@ privateClient.declareType('index', {
 	removeFile: function(f){privateClient.remove(f).then(function(){
 		idx.remove({"id":f,"body":f,"title":f});
     var texttxt;
+    var item = f;
 	if(item.slice(-1)=='/') {texttxt=item.slice(0,item.length-1);}
 	else {texttxt=item.split('.md')[0];}
         var frameid = document.getElementById(texttxt);
