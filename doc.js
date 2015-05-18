@@ -70,8 +70,8 @@ privateClient.declareType('index', {
 		});
 	},
 	indexer: function(path){
-        if (remoteStorage.remote.online) {
-		privateClient.getFile(path).then(function(file) {
+        //if (remoteStorage.remote.online) {
+		privateClient.getFile(path,false).then(function(file) {
 		        var doc = {
 		        	    "title": path,
 		    			"body": file.data,
@@ -86,16 +86,15 @@ privateClient.declareType('index', {
 		        timeoutIDx = window.setTimeout(function(){tmpgear = false;document.querySelector("#listsearchres").innerHTML = '';},3000);
 		     //   console.log(doc);
 	        });
-        }
+      /*  }
         else {
-            console.log("offline");
             var doc = {
                 "title": path,
                 "body": path,
                 "id": path
                 };
 		        idx.add(doc);
-        }
+        }*/
 	},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
