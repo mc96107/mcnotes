@@ -88,6 +88,7 @@ privateClient.declareType('index', {
 	        });
         }
         else {
+            console.log("offline");
             var doc = {
                 "title": path,
                 "body": path,
