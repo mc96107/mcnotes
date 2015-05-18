@@ -240,7 +240,7 @@ function readfll(item){
 	if(item.slice(-1)=='/') a.onclick=function() {setcurfolder(this);};
 	else a.onclick=function() {remoteStorage.mcnotes.readFile(this.t);};
 	li.appendChild(a);
-    li.id = textnode;
+    li.id = texttxt;
 	var x=document.createElement('button'); 
 	x.innerHTML='<i class="fa fa-times"></i>';
 	x.t=item;
