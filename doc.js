@@ -1,4 +1,5 @@
 var retries = 0;
+var tmpgear = false;
 var timeoutIDx; 
 if(!RemoteStorage) {RemoteStorage = remoteStorage;}
 RemoteStorage.defineModule('mcnotes', function(privateClient, publicClient) {
@@ -69,7 +70,7 @@ privateClient.declareType('index', {
 		});
 	},
 	indexer: function(path){
-        if (remoteStorage.connected) {
+        if (remoteStorage.remote.online) {
 		privateClient.getFile(path).then(function(file) {
 		        var doc = {
 		        	    "title": path,
@@ -77,11 +78,12 @@ privateClient.declareType('index', {
 		    			"id": path
 		        	};
 		        idx.add(doc);
-		        if (document.querySelector("#listsearchres").innerHTML !== '<br><center><i class="fa fa-cog fa-spin fa-5x"></i></center>'){
+		        if (!tmpgear){
 		        document.querySelector("#listsearchres").innerHTML = '<br><center><i class="fa fa-cog fa-spin fa-5x"></i></center>';
-		        document.querySelector("#listsearchres").style.color = "#A3A3A3";}
+		        document.querySelector("#listsearchres").style.color = "#A3A3A3";
+                tmpgear = true;}
 		        window.clearTimeout(timeoutIDx);
-		        timeoutIDx = window.setTimeout(function(){document.querySelector("#listsearchres").innerHTML = '';},1000);
+		        timeoutIDx = window.setTimeout(function(){tmpgear = false;document.querySelector("#listsearchres").innerHTML = '';},3000);
 		     //   console.log(doc);
 	        });
         }
