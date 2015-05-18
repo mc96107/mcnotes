@@ -79,11 +79,11 @@ privateClient.declareType('index', {
 		        	};
 		        idx.add(doc);
 		        if (!tmpgear){
-		        document.querySelector("#listsearchres").innerHTML = '<br><center><i class="fa fa-cog fa-spin fa-5x"></i></center>';
-		        document.querySelector("#listsearchres").style.color = "#A3A3A3";
+		        document.querySelector("#rotatingicon").innerHTML = '<br><center><i class="fa fa-cog fa-spin fa-5x"></i></center>';
+		        document.querySelector("#rotatingicon").style.color = "#A3A3A3";
                 tmpgear = true;}
 		        window.clearTimeout(timeoutIDx);
-		        timeoutIDx = window.setTimeout(function(){tmpgear = false;document.querySelector("#listsearchres").innerHTML = '';},3000);
+		        timeoutIDx = window.setTimeout(function(){tmpgear = false;document.querySelector("#rotatingicon").innerHTML = '';},3000);
 		     //   console.log(doc);
 	        });
       /*  }
@@ -120,7 +120,9 @@ privateClient.declareType('index', {
 	createFile: function(f,t){
 	if (f.substring(f.length-3,f.length)!='.md') f=f+'.md';
 	if (indxarr.indexOf(f)==-1){
-	return privateClient.storeFile('text/plain', f, t).then(function(){refreshlist();
+	return privateClient.storeFile('text/plain', f, t).then(function(){
+		//f.split("/").slice(0,-1).join("/")+"/";
+		refreshlist();
 	//remoteStorage.caching.waitForPath('/mcnotes/').then(function(){
 	cfile=f;
 	breadfun(f);

@@ -32,6 +32,16 @@ td,#relatednotesside {
     vertical-align: top;
 }
 
+#rotatingicon{
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   z-index: -1;
+   overflow: hidden;
+}
+
 @media (max-width: 479px) {
 #relatednotesside{display: none;}
 }
