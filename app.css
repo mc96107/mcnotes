@@ -32,6 +32,10 @@ td,#relatednotesside {
     vertical-align: top;
 }
 
+
+
+@media (max-width: 479px) {
+#relatednotesside{display: none;}
 #rotatingicon{
    position: absolute;
    top: 150;
@@ -40,9 +44,6 @@ td,#relatednotesside {
    z-index: -1;
    overflow: hidden;
 }
-
-@media (max-width: 479px) {
-#relatednotesside{display: none;}
 }
 
 @media (min-width: 480px) {
@@ -60,11 +61,11 @@ td,#relatednotesside {
     float: left;
 }
 #rotatingicon{
-   position: absolute;
-   top: 150;
-   right: 100;
-   z-index: -1;
-   overflow: hidden;
+    position:absolute;
+    top:150;
+    right:14%;
+    z-index:-1;
+    overflow:hidden
 }
 #clearsrchformbtnn{visibility: hidden;}
 #searchbtn{display: none;}
