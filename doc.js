@@ -69,6 +69,7 @@ privateClient.declareType('index', {
 		});
 	},
 	indexer: function(path){
+        if (remoteStorage.connected) {
 		privateClient.getFile(path).then(function(file) {
 		        var doc = {
 		        	    "title": path,
@@ -83,6 +84,15 @@ privateClient.declareType('index', {
 		        timeoutIDx = window.setTimeout(function(){document.querySelector("#listsearchres").innerHTML = '';},1000);
 		     //   console.log(doc);
 	        });
+        }
+        else {
+            var doc = {
+                "title": path,
+                "body": path,
+                "id": path
+                };
+		        idx.add(doc);
+        }
 	},
 	addbookmark: function(url){
 	privateClient.getFile('bookmarks.md').then(function(file) {
