@@ -1,6 +1,9 @@
 var retries = 0;
 var tmpgear = false;
 var timeoutIDx; 
+var timeoutresetsync; 
+var cacheforcesync = false; 
+
 if(!RemoteStorage) {RemoteStorage = remoteStorage;}
 RemoteStorage.defineModule('mcnotes', function(privateClient, publicClient) {
 //privateClient.cache('');
@@ -50,7 +53,7 @@ privateClient.declareType('index', {
 	});},
 	collapse: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {colfl(path,item);}});},
 	expand: function(path){privateClient.getListing(path).then(function(objects) {for(var item in objects) {expfl(path,item);}});},
-	readFile: function(f){if (indxarr.indexOf(f)!=-1) {privateClient.getFile(f,false).then(function(file) {
+	readFile: function(f){if (indxarr.indexOf(f)!=-1) {privateClient.getFile(f,cachefsyncfunc(cacheforcesync)).then(function(file) {
 	cfile=f;
 	edtr.value=file.data;
 	mrkd.innerHTML=marked(file.data);
@@ -64,14 +67,14 @@ privateClient.declareType('index', {
 	else remoteStorage.mcnotes.createFile(f,'');
 	},
 	searchdoc: function(f,b,ul){
-	privateClient.getFile(f,false).then(function(file) {
+	privateClient.getFile(f,cachefsyncfunc(cacheforcesync)).then(function(file) {
 		if(file.data && file.data.indexOf(b)!=-1) ul.appendChild(readflls(f));
 		else return false;
 		});
 	},
 	indexer: function(path){
         //if (remoteStorage.remote.online) {
-		privateClient.getFile(path,false).then(function(file) {
+		privateClient.getFile(path,cachefsyncfunc(cacheforcesync)).then(function(file) {
 		        var doc = {
 		        	    "title": path,
 		    			"body": file.data,
@@ -83,7 +86,14 @@ privateClient.declareType('index', {
 		        document.querySelector("#rotatingicon").style.color = "#A3A3A3";
                 tmpgear = true;}
 		        window.clearTimeout(timeoutIDx);
-		        timeoutIDx = window.setTimeout(function(){tmpgear = false;document.querySelector("#rotatingicon").innerHTML = '';},3000);
+		        timeoutIDx = window.setTimeout(function(){
+                    tmpgear = false;
+                    document.querySelector("#rotatingicon").innerHTML = '';
+                    window.clearTimeout(timeoutresetsync);
+                    timeoutresetsync = window.setTimeout(function(){
+                        cacheforcesync = false; 
+                    },remoteStorage.getCurrentSyncInterval()*5);
+                },3000);
 		     //   console.log(doc);
 	        });
       /*  }
@@ -97,7 +107,7 @@ privateClient.declareType('index', {
         }*/
 	},
 	addbookmark: function(url){
-	privateClient.getFile('bookmarks.md',false).then(function(file) {
+	privateClient.getFile('bookmarks.md',cachefsyncfunc(cacheforcesync)).then(function(file) {
 	if(file.data) var bookmarks=file.data;
 	else bookmarks='';
 	bookmarks=bookmarks+'  \n* '+url;
@@ -155,7 +165,7 @@ privateClient.declareType('index', {
         */
         });
 	},
-	mf: function(p1,p2){privateClient.getFile(p1,false).then(function(file){
+	mf: function(p1,p2){privateClient.getFile(p1,cachefsyncfunc(cacheforcesync)).then(function(file){
 	//privateClient.storeFile('text/plain', p2, file.data);
 	remoteStorage.mcnotes.writeFile(p2,file.data);
 	remoteStorage.mcnotes.removeFile(p1);
@@ -323,4 +333,15 @@ var title=f.split('.md')[0];
 //console.log(title);
 srchfnidx(indxarr,title,relatednotesside);
 srchfnidx(indxarr,title,relatednotesdiv);
+}
+
+
+function cachefsyncfunc(c){
+    if (c) return remoteStorage.getCurrentSyncInterval()*2;
+    else return false;
+}
+
+function cachefsyncfuncbtn(){
+    cacheforcesync = true;
+    refreshlist();flpcrd('list');
 }

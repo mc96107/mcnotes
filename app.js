@@ -6,6 +6,7 @@ marked.setOptions({
 	smartLists: true,
 	langPrefix: 'language-'
 });
+var version = '0.0.4';
 var cfile="";
 var cfolder="";
 var frmclndr=0;
